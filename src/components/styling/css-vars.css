@@ -1,0 +1,14 @@
+/* body[data-theme='light'] {
+  --colors-primary: deeppink;
+  --colors-background: white;
+}
+body[data-theme='dark'] {
+  --colors-primary: lightpink;
+  --colors-background: black;
+} */
+:root {
+  --main-green: #16a084;
+  --fill-green: #18b394a6;
+  /* --dim-gray-not-current: #6b6b6bfb; */
+  --not-available: #d8d8d8fb;
+}

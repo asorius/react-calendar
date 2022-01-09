@@ -1,0 +1,40 @@
+.box {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave {
+  opacity: 0.4;
+  position: absolute;
+  top: 3%;
+  left: -150%;
+  background: var(--fill-green);
+  width: 15rem;
+  height: 15rem;
+  margin-top: 5px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 3000ms infinite linear;
+}
+
+.wave.-three {
+  animation: drift 5000ms infinite linear;
+  transform: translateX(-25%);
+}
+*/ .wave.-two {
+  animation: drift 7000ms infinite linear;
+  opacity: 0.1;
+  transform: translateX(25%);
+
+  background: yellow;
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

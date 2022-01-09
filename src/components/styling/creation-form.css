@@ -1,0 +1,51 @@
+.creation-form-container {
+  height: 100%;
+  width: 100%;
+  border-left: 1px solid black;
+  transform: translateX(200%);
+  display: grid;
+  place-content: center;
+}
+.creation-form-container h1 {
+  margin-bottom: 2rem;
+}
+.form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sub-text {
+  font-size: 0.8rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+}
+.form-buttons {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+}
+
+@keyframes slider {
+  95% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes fader {
+  0% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.creation-form-container.form-active {
+  animation: fader 1s forwards, slider 1s forwards;
+}

@@ -1,0 +1,44 @@
+.error-container {
+  color: tomato;
+  /* position: absolute;
+  left: 0;
+  bottom: 100%; */
+  width: 100%;
+  position: relative;
+  padding: 1rem 0;
+}
+.error-container.open {
+  animation: cont 2s alternate 4;
+}
+.error-container::after {
+  content: '';
+  height: 1px;
+  width: 50%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  transform: translateX(50%);
+  left: 0;
+  background-color: tomato;
+}
+.error-container.open::after {
+  animation: ani 1s forwards;
+}
+@keyframes ani {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+@keyframes cont {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
