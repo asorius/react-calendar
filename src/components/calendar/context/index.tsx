@@ -1,7 +1,21 @@
 import { createContext, useReducer } from 'react';
-const CalendarContext = createContext();
-
-const contextIntialState = {
+import { act } from 'react-dom/test-utils';
+const ACTIONS = {
+  INCREMENT: 'increment',
+  DECREMENT: 'decrement',
+  SELECT: 'select',
+};
+type SELECTPAYLOAD = {
+  day: number;
+  month: number;
+  year: number;
+};
+type ACTIONTYPE =
+  | { type: 'increment'; payload: undefined }
+  | { type: 'decrement'; payload: undefined }
+  | { type: 'select'; payload: SELECTPAYLOAD }
+  | { type: 'create-booking'; payload: undefined };
+const initialState = {
   currentDate: {
     day: new Date().getDate(),
     month: new Date().getMonth() + 1,
@@ -13,9 +27,12 @@ const contextIntialState = {
     year: new Date().getFullYear(),
   },
 };
-const reducerFunction = (state, action) => {
-  switch (action.type) {
-    case 'increment': {
+const CalendarContext: any = createContext('');
+
+const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
+  const { type } = action;
+  switch (type) {
+    case ACTIONS.INCREMENT: {
       if (state.currentDisplayDate.month >= 12) {
         return {
           ...state,
@@ -35,7 +52,7 @@ const reducerFunction = (state, action) => {
         };
       }
     }
-    case 'decrement': {
+    case ACTIONS.DECREMENT: {
       if (state.currentDisplayDate.month <= 1) {
         return {
           ...state,
@@ -55,30 +72,27 @@ const reducerFunction = (state, action) => {
         };
       }
     }
-    case 'select': {
-      let informationAboutThatDay;
-      const dataFromProps = [];
-      let result = dataFromProps.find(
-        (el) =>
-          el.day === action.payload.day &&
-          el.month === action.payload.month &&
-          el.year === action.payload.year
-      );
-      informationAboutThatDay = result?.timeAvailability ?? false;
-      console.log(action.payload.month);
+    case ACTIONS.SELECT: {
+      // let informationAboutThatDay;
+      // const dataFromProps = [];
+      // let result = dataFromProps.find(
+      //   (el) =>
+      //     el.day === action.payload.day &&
+      //     el.month === action.payload.month &&
+      //     el.year === action.payload.year
+      // );
+      // informationAboutThatDay = result?.timeAvailability ?? false;
+      console.log(action.payload?.month);
       return {
         ...state,
-        currentDisplayDate: {
-          ...state.currentDisplayDate,
-          day: action.payload.day,
-          month: action.payload.month,
-          year: action.payload.year,
-        },
-        timeAvailability: informationAboutThatDay,
+        // currentDisplayDate: {
+        //   ...state.currentDisplayDate,
+        //   day: action.payload.day,
+        //   month: action.payload.month,
+        //   year: action.payload.year,
+        // },
+        // timeAvailability: informationAboutThatDay,
       };
-    }
-    case 'create-booking': {
-      return { ...state };
     }
     default: {
       console.log('From default reducer case');
@@ -86,8 +100,8 @@ const reducerFunction = (state, action) => {
     }
   }
 };
-const ContextProviderComponentWithReducerAsAState = ({ children }) => {
-  const [state, dispatch] = useReducer(reducerFunction, contextIntialState);
+const CalendarContextProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(reducerFunction, initialState);
   const contextValue = { state, dispatch };
   return (
     <CalendarContext.Provider value={contextValue}>
@@ -95,7 +109,4 @@ const ContextProviderComponentWithReducerAsAState = ({ children }) => {
     </CalendarContext.Provider>
   );
 };
-export {
-  ContextProviderComponentWithReducerAsAState,
-  CalendarContext as DatesContext,
-};
+export { CalendarContextProvider, CalendarContext };
