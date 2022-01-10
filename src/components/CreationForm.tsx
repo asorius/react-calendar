@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
 import { DatesContext } from './context/DatesContext';
-import './styling/creation-form.css';
-import InputElement from './InputElement';
-import './styling/select-element.css';
-import ErrorElement from './ErrorElement';
+// import './styling/creation-form.css';
+import InputElement from './calendar/InputElement';
+// import './styling/select-element.css';
+import ErrorElement from './calendar/ErrorElement';
 export default function CreationForm({ handleAction, open }) {
   const context = useContext(DatesContext);
   const [values, setValues] = useState({
@@ -40,7 +40,7 @@ export default function CreationForm({ handleAction, open }) {
     <div className={`creation-form-container ${open && 'form-active'}`}>
       <h1>
         {' '}
-        Availability at {date.day}/{date.month}/{date.year}
+        Availability for {date.day}/{date.month}/{date.year}
       </h1>
       {availableTimes && (
         <div className='time-selection'>

@@ -34,6 +34,7 @@ button:disabled {
 }
 button:disabled:hover {
   cursor: not-allowed;
+  border: 1px solid var(--main-green);
 }
 label {
   font-size: 1.2rem;

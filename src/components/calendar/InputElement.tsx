@@ -1,4 +1,4 @@
-import './styling/input-element.css';
+import './styles/input-element.css';
 
 export default function InputElement({
   changeHandler,

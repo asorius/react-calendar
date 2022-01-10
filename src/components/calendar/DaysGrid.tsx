@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useCallback } from 'react';
-import { DatesContext } from './context/DatesContext';
+import { DatesContext } from '../context/DatesContext';
 import { mockupData, dayNames } from './utils';
 import Day from './Day';
 

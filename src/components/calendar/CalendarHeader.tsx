@@ -1,8 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
-import { DatesContext } from './context/DatesContext';
+import { DatesContext } from '../context/DatesContext';
 import { monthNames, arrowImage } from './utils';
-import './styling/calendar/calendar-header.css';
+import './styles/calendar-header.css';
 
 export default function CalendarHeader({ creationHandler }) {
   const context = useContext(DatesContext);

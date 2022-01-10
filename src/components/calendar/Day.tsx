@@ -1,8 +1,8 @@
 import React from 'react';
-import { DatesContext } from './context/DatesContext';
+import { DatesContext } from '../context/DatesContext';
 import { useContext } from 'react';
-import './styling/calendar/day-element.css';
-import './styling/waves-element.css';
+import './styles/day-element.css';
+import './styles/waves-element.css';
 export default function Day({
   day,
   monthQueue,

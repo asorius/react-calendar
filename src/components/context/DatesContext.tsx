@@ -1,8 +1,19 @@
 import { createContext, useReducer } from 'react';
+import * as React from 'react';
 import { mockupData } from '../utils';
-const DatesContext = createContext();
+type SELECTPAYLOAD = {
+  day: number;
+  month: number;
+  year: number;
+};
+type ACTIONTYPE =
+  | { type: 'increment'; payload: undefined }
+  | { type: 'decrement'; payload: undefined }
+  | { type: 'select'; payload: SELECTPAYLOAD }
+  | { type: 'create-booking'; payload: undefined };
+const DatesContext = createContext('');
 
-const contextIntialState = {
+const initialState = {
   currentDate: {
     day: new Date().getDate(),
     month: new Date().getMonth() + 1,
@@ -15,7 +26,7 @@ const contextIntialState = {
   },
   timeAvailability: [],
 };
-const reducerFunction = (state, action) => {
+const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
   switch (action.type) {
     case 'increment': {
       if (state.currentDisplayDate.month >= 12) {
@@ -60,7 +71,7 @@ const reducerFunction = (state, action) => {
     case 'select': {
       let informationAboutThatDay;
       let result = mockupData.find(
-        (el) =>
+        (el: SELECTPAYLOAD) =>
           el.day === action.payload.day &&
           el.month === action.payload.month &&
           el.year === action.payload.year
@@ -87,8 +98,10 @@ const reducerFunction = (state, action) => {
     }
   }
 };
-const ContextProviderComponentWithReducerAsAState = ({ children }) => {
-  const [state, dispatch] = useReducer(reducerFunction, contextIntialState);
+const ContextProviderComponentWithReducerAsAState: React.FC = ({
+  children,
+}) => {
+  const [state, dispatch] = useReducer(reducerFunction, initialState);
   const contextValue = { state, dispatch };
   return (
     <DatesContext.Provider value={contextValue}>
