@@ -5,7 +5,7 @@ import './styles/weekdays-container.css';
 
 function Calendar() {
   const [creationIsOpen, setOpen] = useState(false);
-  const openerHandler = (clickedInParentArea: boolean) => {
+  const openerHandler = (clickedInParentArea: boolean): void => {
     if (clickedInParentArea) {
       setOpen(true);
     } else {

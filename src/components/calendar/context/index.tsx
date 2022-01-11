@@ -1,20 +1,24 @@
-import { createContext, useReducer } from 'react';
-import { act } from 'react-dom/test-utils';
-const ACTIONS = {
-  INCREMENT: 'increment',
-  DECREMENT: 'decrement',
-  SELECT: 'select',
-};
-type SELECTPAYLOAD = {
+import React, { createContext, useReducer } from 'react';
+enum ACTIONS {
+  INCREMENT = 'increment',
+  DECREMENT = 'decrement',
+  SELECT = 'select',
+}
+type FULLDATETYPE = {
   day: number;
   month: number;
   year: number;
 };
+type SELECTPAYLOAD = FULLDATETYPE;
 type ACTIONTYPE =
-  | { type: 'increment'; payload: undefined }
-  | { type: 'decrement'; payload: undefined }
-  | { type: 'select'; payload: SELECTPAYLOAD }
-  | { type: 'create-booking'; payload: undefined };
+  | { type: ACTIONS.INCREMENT }
+  | { type: ACTIONS.DECREMENT }
+  | { type: ACTIONS.SELECT; payload: SELECTPAYLOAD };
+// | { type: 'create-booking'; payload: undefined };
+type INITIALSTATETYPE = {
+  currentDate: FULLDATETYPE;
+  currentDisplayDate: FULLDATETYPE;
+};
 const initialState = {
   currentDate: {
     day: new Date().getDate(),
@@ -27,7 +31,13 @@ const initialState = {
     year: new Date().getFullYear(),
   },
 };
-const CalendarContext: any = createContext('');
+const CalendarContext = createContext<{
+  state: INITIALSTATETYPE;
+  dispatch: React.Dispatch<ACTIONTYPE>;
+}>({
+  state: initialState,
+  dispatch: () => {},
+});
 
 const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
   const { type } = action;
@@ -102,11 +112,10 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
 };
 const CalendarContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducerFunction, initialState);
-  const contextValue = { state, dispatch };
   return (
-    <CalendarContext.Provider value={contextValue}>
+    <CalendarContext.Provider value={{ state, dispatch }}>
       {children}
     </CalendarContext.Provider>
   );
 };
-export { CalendarContextProvider, CalendarContext };
+export { CalendarContextProvider, CalendarContext, ACTIONS };

@@ -1,41 +1,59 @@
-import { createContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { mockupData } from '../utils';
-const ACTIONS = {
-  CALL_API: 'call-api',
-  GET_SINGLE_DAY: 'get-information-on-day',
-  BOOK_NEW: 'book-new',
-};
-type ACTIONTYPE =
-  | { type: 'call-api'; payload: undefined }
-  | { type: 'get-information-on-day'; payload: FULLDATE };
-type FULLDATE = {
+enum ACTIONS {
+  CALL_API = 'call-api',
+  GET_SINGLE_DAY = 'get-information-on-day',
+  BOOK_NEW = 'book-new',
+}
+type FULLDATETYPE = {
   day: number;
   month: number;
   year: number;
 };
-type INDIVIDUAL_DAY = FULLDATE & {
+type ACTIONTYPE =
+  | { type: ACTIONS.CALL_API }
+  | {
+      type: ACTIONS.GET_SINGLE_DAY;
+      payload: FULLDATETYPE;
+    };
+// { type: string; payload?: FULLDATETYPE };
+
+type DAYOBJECT = FULLDATETYPE & {
   timeAvailability: string[];
   bookingRate: number;
 };
-
-const initialState: {} = {
-  data: [],
-  informationOnSelectedDay: {},
+type INITIALSTATETYPE = {
+  all: DAYOBJECT[] | [];
+  day: DAYOBJECT | {};
 };
-const DatesContext = createContext(initialState);
+const initialState = {
+  all: [],
+  day: {},
+};
+const DatesContext = createContext<{
+  state: INITIALSTATETYPE;
+  dispatch: React.Dispatch<ACTIONTYPE>;
+}>({
+  state: initialState,
+  dispatch: () => {},
+});
 
-const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
-  const { type, payload } = action;
+const reducerFunction = (
+  state: INITIALSTATETYPE,
+  action: ACTIONTYPE
+): INITIALSTATETYPE => {
+  const { type } = action;
   switch (type) {
     case ACTIONS.CALL_API: {
       return {
         ...state,
-        data: [...mockupData],
+        all: [...mockupData],
       };
     }
     case ACTIONS.GET_SINGLE_DAY: {
+      const { payload } = action;
       let result = mockupData.find(
-        (el: FULLDATE) =>
+        (el: FULLDATETYPE) =>
           el.day === payload?.day &&
           el.month === payload?.month &&
           el.year === payload?.year
@@ -43,7 +61,7 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
       if (result) {
         return {
           ...state,
-          informationOnSelectedDay: result,
+          day: result,
         };
       } else {
         return {
@@ -61,11 +79,10 @@ const ContextProviderComponentWithReducerAsAState: React.FC = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(reducerFunction, initialState);
-  const contextValue = { state, dispatch };
   return (
-    <DatesContext.Provider value={contextValue}>
+    <DatesContext.Provider value={{ state, dispatch }}>
       {children}
     </DatesContext.Provider>
   );
 };
-export { ContextProviderComponentWithReducerAsAState, DatesContext };
+export { ContextProviderComponentWithReducerAsAState, DatesContext, ACTIONS };

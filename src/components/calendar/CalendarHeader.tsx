@@ -1,16 +1,16 @@
 import React from 'react';
 import { useContext } from 'react';
-import { DatesContext } from '../context/DatesContext';
+import { CalendarContext, ACTIONS } from './context';
 import { monthNames, arrowImage } from './utils';
 import './styles/calendar-header.css';
 
 export default function CalendarHeader({ creationHandler }) {
-  const context = useContext(DatesContext);
+  const context = useContext(CalendarContext);
   const dispatch = context.dispatch;
   const { year, month } = context.state.currentDisplayDate;
   const { currentDate } = context.state;
-  const actionFn = (type) => {
-    dispatch({ type });
+  const actionFn = (type: string) => {
+    dispatch({ action });
     //in case of previously opened creation form, close it
     // creationHandler(false);
   };
