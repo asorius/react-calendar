@@ -1,25 +1,33 @@
 import React from 'react';
-import { DatesContext } from '../context/DatesContext';
+import { CalendarContext, ACTIONS } from './context';
 import { useContext } from 'react';
 import './styles/day-element.css';
 import './styles/waves-element.css';
+type PROPTYPES = {
+  day: number;
+  monthQueue: string;
+  isCurrentDay: boolean;
+  weekdayName: string | false;
+  bookRate: number;
+  onClickAction: (show: boolean) => void;
+};
 export default function Day({
   day,
   monthQueue,
-  currentDay,
+  isCurrentDay,
   weekdayName,
-  bookingInfo,
+  bookRate,
   onClickAction,
-}) {
-  const context = useContext(DatesContext);
+}: PROPTYPES) {
+  const context = useContext(CalendarContext);
   const dispatch = context.dispatch;
-  const node = React.useRef();
+  const node = React.useRef<HTMLDivElement>(null);
   const { month, year } = context.state.currentDisplayDate;
   const currentYear = context.state.currentDate.year;
   const currentMonth = context.state.currentDate.month;
   const currentDayDate = context.state.currentDate.day;
 
-  const adjustMonth = (q) => {
+  const adjustMonth = (q: string) => {
     switch (q) {
       case 'prev': {
         return month - 1 || 12;
@@ -32,7 +40,7 @@ export default function Day({
       }
     }
   };
-  const adjustYear = (q) => {
+  const adjustYear = (q: string) => {
     switch (q) {
       case 'prev': {
         return month - 1 < 1 ? year - 1 : year;
@@ -53,23 +61,22 @@ export default function Day({
   const dayHasPassed =
     day < currentDayDate && currentMonth === currentDaysMonth;
   const unavailableDay = isFromPreviousMonthOrYear || dayHasPassed;
-
   return (
     <div
-      className={`day ${monthQueue} ${currentDay} ${
+      className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
         (isWeekend || unavailableDay) && 'unavailable'
       }`}
       onClick={(e) => {
         if (isWeekend || unavailableDay) return;
         dispatch({
-          type: 'select',
+          type: ACTIONS.SELECT,
           payload: { day, month: currentDaysMonth, year: currentDaysYear },
         });
-        onClickAction(node.current.contains(e.target));
+        onClickAction(true);
       }}
       ref={node}>
       {day}
-      {bookingInfo && !unavailableDay && (
+      {!unavailableDay && (
         <div
           style={{
             position: 'absolute',
@@ -77,7 +84,7 @@ export default function Day({
             left: 0,
             content: '',
             width: '150%',
-            height: `${bookingInfo * 100}%`,
+            height: `${bookRate * 100}%`,
             zIndex: -2,
           }}
           className='box'>

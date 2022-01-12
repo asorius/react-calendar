@@ -1,9 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { CalendarHeader, WeekdayNames, DaysGrid, Form } from './';
 import './styles/calendar-container.css';
 import './styles/weekdays-container.css';
-
-function Calendar() {
+type DATAELEMENTTYPE = {
+  day: number;
+  month: number;
+  year: number;
+  timeAvailability: string[];
+  bookRate: number;
+};
+type PROPTYPES = {
+  data: DATAELEMENTTYPE[];
+};
+function Calendar({ data }: PROPTYPES) {
   const [creationIsOpen, setOpen] = useState(false);
   const openerHandler = (clickedInParentArea: boolean): void => {
     if (clickedInParentArea) {
@@ -19,7 +28,7 @@ function Calendar() {
         className={`form-weekday-container ${
           creationIsOpen ? 'form-active' : ''
         }`}>
-        <CalendarHeader creationHandler={openerHandler}></CalendarHeader>
+        <CalendarHeader></CalendarHeader>
         <div
           className={`week-days-container ${
             creationIsOpen ? 'form-active' : ''
@@ -27,7 +36,7 @@ function Calendar() {
           <WeekdayNames />
 
           <div className='week-days-list'>
-            <DaysGrid onDayClick={openerHandler}></DaysGrid>
+            <DaysGrid onDayClick={openerHandler} data={data}></DaysGrid>
           </div>
           <div className='week-days-asterix'>
             * Fully colored day represents fully booked.

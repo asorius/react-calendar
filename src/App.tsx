@@ -1,24 +1,16 @@
 import './App.css';
-import {
-  ContextProviderComponentWithReducerAsAState,
-  DatesContext,
-  ACTIONS,
-} from './components/context/DatesContext';
-import Calendar from './components/calendar/Calendar';
+import { Calendar } from './components/calendar';
 import './components/styling/css-vars.css';
-import { useContext, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import mockupData from './components/utils';
 function App() {
-  const globalContext = useContext(DatesContext);
+  const [data, setData] = useState<typeof mockupData>([]);
   useEffect(() => {
-    const { state, dispatch } = globalContext;
-    dispatch({ type: ACTIONS.CALL_API });
-    console.log(state);
-  }, [globalContext]);
+    setData(mockupData);
+  }, []);
   return (
     <div className='App'>
-      <ContextProviderComponentWithReducerAsAState>
-        <Calendar></Calendar>
-      </ContextProviderComponentWithReducerAsAState>
+      <Calendar data={data}></Calendar>
     </div>
   );
 }

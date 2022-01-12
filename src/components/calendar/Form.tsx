@@ -1,10 +1,16 @@
 import { useContext, useState, useEffect } from 'react';
-import { DatesContext } from '../context/DatesContext';
+import { CalendarContext } from './context';
 // import './styling/creation-form.css';
 import { InputElement, ErrorElement } from '.';
 // import './styling/select-element.css';
-export default function CreationForm({ handleAction, open }) {
-  const context = useContext(DatesContext);
+export default function Form({
+  handleAction,
+  open,
+}: {
+  handleAction: (arg: boolean) => void;
+  open: boolean;
+}) {
+  const context = useContext(CalendarContext);
   const [values, setValues] = useState({
     firstname: '',
     lastname: '',
