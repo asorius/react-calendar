@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CalendarHeader, WeekdayNames, DaysGrid, Form } from './';
 import './styles/calendar-container.css';
 import './styles/weekdays-container.css';
+import { CalendarContextProvider } from './context';
 type DATAELEMENTTYPE = {
   day: number;
   month: number;
@@ -24,28 +25,30 @@ function Calendar({ data }: PROPTYPES) {
 
   return (
     <div className='calendar-container'>
-      <div
-        className={`form-weekday-container ${
-          creationIsOpen ? 'form-active' : ''
-        }`}>
-        <CalendarHeader></CalendarHeader>
+      <CalendarContextProvider>
         <div
-          className={`week-days-container ${
+          className={`form-weekday-container ${
             creationIsOpen ? 'form-active' : ''
           }`}>
-          <WeekdayNames />
+          <CalendarHeader></CalendarHeader>
+          <div
+            className={`week-days-container ${
+              creationIsOpen ? 'form-active' : ''
+            }`}>
+            <WeekdayNames />
 
-          <div className='week-days-list'>
-            <DaysGrid onDayClick={openerHandler} data={data}></DaysGrid>
-          </div>
-          <div className='week-days-asterix'>
-            * Fully colored day represents fully booked.
+            <div className='week-days-list'>
+              <DaysGrid onDayClick={openerHandler} data={data}></DaysGrid>
+            </div>
+            <div className='week-days-asterix'>
+              * Fully colored day represents fully booked.
+            </div>
           </div>
         </div>
-      </div>
-      {creationIsOpen && (
-        <Form open={creationIsOpen} handleAction={openerHandler}></Form>
-      )}
+        {creationIsOpen && (
+          <Form open={creationIsOpen} handleAction={openerHandler}></Form>
+        )}
+      </CalendarContextProvider>
     </div>
   );
 }

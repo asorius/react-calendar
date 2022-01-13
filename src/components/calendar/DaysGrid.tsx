@@ -21,7 +21,7 @@ type OBJECTTYPES = {
   weekdayName: string;
   monthQueue: string;
   isCurrentDay: boolean;
-  bookRate: number;
+  bookingInformation?: { rate: number; times: string[] };
 };
 const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
   const [dayObjectsList, updateList] = useState<OBJECTTYPES[] | []>([]);
@@ -64,11 +64,15 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
     const bookingFinder = (weekdayName: string, dayNumber: number) => {
       if (weekdayName !== 'sat' && weekdayName !== 'sun') {
         let result = data.find(
-          (el) => el.day === dayNumber && el.month === month && el.year === year
+          (el: DATAELEMENTTYPE) =>
+            el.day === dayNumber && el.month === month && el.year === year
         );
-        return result?.bookRate || 0;
-      } else {
-        return 0;
+        return (
+          result && {
+            rate: result?.bookRate,
+            times: result.timeAvailability,
+          }
+        );
       }
     };
 
@@ -89,7 +93,6 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
         weekdayName: dayNames[weekdayIndexofFirstday - i - 1],
         monthQueue: 'prev',
         isCurrentDay: false,
-        bookRate: 0,
       });
     }
     //Loop to create day objects for currently displayed month
@@ -108,7 +111,7 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
           i === currentDate.day &&
           month === currentDate.month &&
           year === currentDate.year,
-        bookRate: bookingFinder(weekdayName, i),
+        bookingInformation: bookingFinder(weekdayName, i),
       });
     }
     for (let i = 1; i <= amountOfDaysToAddForNextMonth; i++) {
@@ -119,11 +122,10 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
         weekdayName: dayNames[weekdayIndexofLastday + i],
         monthQueue: 'next',
         isCurrentDay: false,
-        bookRate: 0,
       });
     }
     updateList(list);
-  }, [year, month, context.state, data]);
+  }, [data, month, year, context.state]);
   return (
     <>
       {dayObjectsList.map((el, i) => (
@@ -134,7 +136,7 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
           isCurrentDay={el.isCurrentDay}
           weekdayName={el.weekdayName}
           onClickAction={onDayClick}
-          bookRate={el.bookRate}></Day>
+          bookingInformation={el.bookingInformation}></Day>
       ))}
     </>
   );

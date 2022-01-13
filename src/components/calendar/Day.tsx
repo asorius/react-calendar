@@ -8,7 +8,7 @@ type PROPTYPES = {
   monthQueue: string;
   isCurrentDay: boolean;
   weekdayName: string | false;
-  bookRate: number;
+  bookingInformation?: { rate: number; times: string[] };
   onClickAction: (show: boolean) => void;
 };
 export default function Day({
@@ -16,7 +16,7 @@ export default function Day({
   monthQueue,
   isCurrentDay,
   weekdayName,
-  bookRate,
+  bookingInformation,
   onClickAction,
 }: PROPTYPES) {
   const context = useContext(CalendarContext);
@@ -70,7 +70,12 @@ export default function Day({
         if (isWeekend || unavailableDay) return;
         dispatch({
           type: ACTIONS.SELECT,
-          payload: { day, month: currentDaysMonth, year: currentDaysYear },
+          payload: {
+            day,
+            month: currentDaysMonth,
+            year: currentDaysYear,
+            times: bookingInformation && bookingInformation.times,
+          },
         });
         onClickAction(true);
       }}
@@ -84,7 +89,7 @@ export default function Day({
             left: 0,
             content: '',
             width: '150%',
-            height: `${bookRate * 100}%`,
+            height: `${bookingInformation && bookingInformation.rate * 100}%`,
             zIndex: -2,
           }}
           className='box'>

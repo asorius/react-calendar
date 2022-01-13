@@ -20,12 +20,14 @@ export default function Form({
   const [errorMessage, setError] = useState('');
   // const dispatch = context.dispatch;
   const date = context.state.currentDisplayDate;
-  const availableTimes = context.state.timeAvailability;
+  const { times } = context.state.currentDisplayDate;
   useEffect(() => {
-    setValues((v) => ({ ...v, time: availableTimes[0] }));
-  }, [availableTimes]);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    times && setValues((v) => ({ ...v, time: times[0] }));
+  }, [times]);
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.currentTarget;
     setValues({
       ...values,
       [name]: value,
@@ -35,7 +37,7 @@ export default function Form({
     const timer = setTimeout(() => setError(''), 4000);
     return () => clearTimeout(timer);
   }, [errorMessage]);
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     values.phone.length < 8 &&
       values.email.length < 8 &&
@@ -47,11 +49,11 @@ export default function Form({
         {' '}
         Availability for {date.day}/{date.month}/{date.year}
       </h1>
-      {availableTimes && (
+      {times && (
         <div className='time-selection'>
           <label htmlFor='time-select'>Choose time : </label>
           <select name='time' id='time-select' onChange={handleInputChange}>
-            {availableTimes.map((time, i) => (
+            {times.map((time, i) => (
               <option key={i} value={time}>
                 {time}
               </option>

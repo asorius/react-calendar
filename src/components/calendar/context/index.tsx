@@ -9,15 +9,16 @@ type FULLDATETYPE = {
   month: number;
   year: number;
 };
-type SELECTPAYLOAD = FULLDATETYPE;
+type TIMESTYPE = { times?: string[] | [] };
+type SELECTPAYLOADTYPE = FULLDATETYPE & TIMESTYPE;
 type ACTIONTYPE =
   | { type: ACTIONS.INCREMENT }
   | { type: ACTIONS.DECREMENT }
-  | { type: ACTIONS.SELECT; payload: SELECTPAYLOAD };
+  | { type: ACTIONS.SELECT; payload: SELECTPAYLOADTYPE };
 // | { type: 'create-booking'; payload: undefined };
 type INITIALSTATETYPE = {
   currentDate: FULLDATETYPE;
-  currentDisplayDate: FULLDATETYPE;
+  currentDisplayDate: FULLDATETYPE & TIMESTYPE;
 };
 const initialState = {
   currentDate: {
@@ -36,7 +37,7 @@ const CalendarContext = createContext<{
   dispatch: React.Dispatch<ACTIONTYPE>;
 }>({
   state: initialState,
-  dispatch: () => {},
+  dispatch: () => null,
 });
 
 const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
@@ -83,25 +84,16 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
       }
     }
     case ACTIONS.SELECT: {
-      // let informationAboutThatDay;
-      // const dataFromProps = [];
-      // let result = dataFromProps.find(
-      //   (el) =>
-      //     el.day === action.payload.day &&
-      //     el.month === action.payload.month &&
-      //     el.year === action.payload.year
-      // );
-      // informationAboutThatDay = result?.timeAvailability ?? false;
-      console.log(action.payload?.month);
+      console.log(action.payload);
       return {
         ...state,
-        // currentDisplayDate: {
-        //   ...state.currentDisplayDate,
-        //   day: action.payload.day,
-        //   month: action.payload.month,
-        //   year: action.payload.year,
-        // },
-        // timeAvailability: informationAboutThatDay,
+        currentDisplayDate: {
+          ...state.currentDisplayDate,
+          day: action.payload.day,
+          month: action.payload.month,
+          year: action.payload.year,
+          times: action.payload.times,
+        },
       };
     }
     default: {
