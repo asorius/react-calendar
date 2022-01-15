@@ -1,11 +1,16 @@
 import { useContext, useState, useEffect } from 'react';
-import { DatesContext } from './context/DatesContext';
-import './styling/creation-form.css';
-import InputElement from './InputElement';
-import './styling/select-element.css';
-import ErrorElement from './ErrorElement';
-export default function CreationForm({ handleAction, open }) {
-  const context = useContext(DatesContext);
+import { CalendarContext } from './context';
+import './styles/form-element.css';
+import { InputElement, ErrorElement } from '.';
+import './styles/select-element.css';
+export default function Form({
+  handleAction,
+  open,
+}: {
+  handleAction: (arg: boolean) => void;
+  open: boolean;
+}) {
+  const context = useContext(CalendarContext);
   const [values, setValues] = useState({
     firstname: '',
     lastname: '',
@@ -15,12 +20,14 @@ export default function CreationForm({ handleAction, open }) {
   const [errorMessage, setError] = useState('');
   // const dispatch = context.dispatch;
   const date = context.state.currentDisplayDate;
-  const availableTimes = context.state.timeAvailability;
+  const { times } = context.state.currentDisplayDate;
   useEffect(() => {
-    setValues((v) => ({ ...v, time: availableTimes[0] }));
-  }, [availableTimes]);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    times && setValues((v) => ({ ...v, time: times[0] }));
+  }, [times]);
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.currentTarget;
     setValues({
       ...values,
       [name]: value,
@@ -30,7 +37,7 @@ export default function CreationForm({ handleAction, open }) {
     const timer = setTimeout(() => setError(''), 4000);
     return () => clearTimeout(timer);
   }, [errorMessage]);
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     values.phone.length < 8 &&
       values.email.length < 8 &&
@@ -40,13 +47,13 @@ export default function CreationForm({ handleAction, open }) {
     <div className={`creation-form-container ${open && 'form-active'}`}>
       <h1>
         {' '}
-        Availability at {date.day}/{date.month}/{date.year}
+        Availability for {date.day}/{date.month}/{date.year}
       </h1>
-      {availableTimes && (
+      {times && (
         <div className='time-selection'>
           <label htmlFor='time-select'>Choose time : </label>
           <select name='time' id='time-select' onChange={handleInputChange}>
-            {availableTimes.map((time, i) => (
+            {times.map((time, i) => (
               <option key={i} value={time}>
                 {time}
               </option>
@@ -54,7 +61,7 @@ export default function CreationForm({ handleAction, open }) {
           </select>
         </div>
       )}
-      <form className='form' onSubmit={submitHandler}>
+      <form className='form-element' onSubmit={submitHandler}>
         <InputElement
           name='firstname'
           labelText='First Name'

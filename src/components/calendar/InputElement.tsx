@@ -1,5 +1,16 @@
-import './styling/input-element.css';
-
+import React from 'react';
+import './styles/input-element.css';
+type PROPTYPES = {
+  changeHandler: (
+    arg: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  labelText: string;
+  name: string;
+  validationMessage?: string;
+  value: string;
+  type?: string;
+  required?: boolean;
+};
 export default function InputElement({
   changeHandler,
   labelText,
@@ -8,7 +19,7 @@ export default function InputElement({
   value = '',
   type = 'text',
   required = false,
-}) {
+}: PROPTYPES) {
   return (
     <div className='input-element'>
       <label className='input-label' htmlFor={name}>
@@ -19,7 +30,7 @@ export default function InputElement({
         onChange={changeHandler}
         name={name}
         value={value}
-        label={labelText}
+        // label={labelText}
         required={required}
         aria-required={required}></input>
       <p className='validation-element'>

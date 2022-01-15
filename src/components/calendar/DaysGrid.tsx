@@ -1,15 +1,35 @@
-import { useContext, useState, useEffect, useCallback } from 'react';
-import { DatesContext } from './context/DatesContext';
-import { mockupData, dayNames } from './utils';
-import Day from './Day';
+import { useContext, useState, useEffect } from 'react';
+import { CalendarContext } from './context';
 
-const Days = ({ onDayClick }) => {
-  const [dayObjectsList, updateList] = useState([]);
-  const context = useContext(DatesContext);
+import { dayNames } from './utils';
+import Day from './Day';
+type DATAELEMENTTYPE = {
+  day: number;
+  month: number;
+  year: number;
+  timeAvailability: string[];
+  bookRate: number;
+};
+type PROPTYPES = {
+  onDayClick: (showelement: boolean) => void;
+  data: DATAELEMENTTYPE[];
+};
+type OBJECTTYPES = {
+  dayNumber: number;
+  monthNumber: number;
+  year: number;
+  weekdayName: string;
+  monthQueue: string;
+  isCurrentDay: boolean;
+  bookingInformation?: { rate: number; times: string[] };
+};
+const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
+  const [dayObjectsList, updateList] = useState<OBJECTTYPES[] | []>([]);
+  const context = useContext(CalendarContext);
   const { year, month } = context.state.currentDisplayDate;
   useEffect(() => {
     const { currentDate } = context.state;
-    let list = [];
+    let list: OBJECTTYPES[] = [];
     //Days in current month
     const daysInCurrentlyDisplayedMonth = new Date(year, month, 0).getDate();
 
@@ -41,12 +61,18 @@ const Days = ({ onDayClick }) => {
     const daysInPrevMonth = new Date(year, month - 1, 0).getDate();
 
     //Query mockup data and provide data on that date
-    const bookingFinder = (weekdayName, dayNumber) => {
-      if (weekdayName !== 'sat' || weekdayName !== 'sun') {
-        let result = mockupData.find(
-          (el) => el.day === dayNumber && el.month === month && el.year === year
+    const bookingFinder = (weekdayName: string, dayNumber: number) => {
+      if (weekdayName !== 'sat' && weekdayName !== 'sun') {
+        let result = data.find(
+          (el: DATAELEMENTTYPE) =>
+            el.day === dayNumber && el.month === month && el.year === year
         );
-        return result?.bookRate;
+        return (
+          result && {
+            rate: result?.bookRate,
+            times: result.timeAvailability,
+          }
+        );
       }
     };
 
@@ -66,6 +92,7 @@ const Days = ({ onDayClick }) => {
         year: year,
         weekdayName: dayNames[weekdayIndexofFirstday - i - 1],
         monthQueue: 'prev',
+        isCurrentDay: false,
       });
     }
     //Loop to create day objects for currently displayed month
@@ -80,12 +107,11 @@ const Days = ({ onDayClick }) => {
         year: year,
         weekdayName,
         monthQueue: 'current-month',
-        currentDay:
+        isCurrentDay:
           i === currentDate.day &&
           month === currentDate.month &&
-          year === currentDate.year &&
-          'current-day',
-        bookingInfo: bookingFinder(weekdayName, i),
+          year === currentDate.year,
+        bookingInformation: bookingFinder(weekdayName, i),
       });
     }
     for (let i = 1; i <= amountOfDaysToAddForNextMonth; i++) {
@@ -95,10 +121,11 @@ const Days = ({ onDayClick }) => {
         year: year,
         weekdayName: dayNames[weekdayIndexofLastday + i],
         monthQueue: 'next',
+        isCurrentDay: false,
       });
     }
     updateList(list);
-  }, [year, month, context.state]);
+  }, [data, month, year, context.state]);
   return (
     <>
       {dayObjectsList.map((el, i) => (
@@ -106,12 +133,12 @@ const Days = ({ onDayClick }) => {
           key={i + 20}
           day={el.dayNumber}
           monthQueue={el.monthQueue}
-          currentDay={el.currentDay}
+          isCurrentDay={el.isCurrentDay}
           weekdayName={el.weekdayName}
           onClickAction={onDayClick}
-          bookingInfo={el.bookingInfo}></Day>
+          bookingInformation={el.bookingInformation}></Day>
       ))}
     </>
   );
 };
-export default Days;
+export default DaysGrid;

@@ -1,8 +1,26 @@
-import { createContext, useReducer } from 'react';
-import { mockupData } from '../utils';
-const DatesContext = createContext();
-
-const contextIntialState = {
+import React, { createContext, useReducer } from 'react';
+enum ACTIONS {
+  INCREMENT = 'increment',
+  DECREMENT = 'decrement',
+  SELECT = 'select',
+}
+type FULLDATETYPE = {
+  day: number;
+  month: number;
+  year: number;
+};
+type TIMESTYPE = { times?: string[] | [] };
+type SELECTPAYLOADTYPE = FULLDATETYPE & TIMESTYPE;
+type ACTIONTYPE =
+  | { type: ACTIONS.INCREMENT }
+  | { type: ACTIONS.DECREMENT }
+  | { type: ACTIONS.SELECT; payload: SELECTPAYLOADTYPE };
+// | { type: 'create-booking'; payload: undefined };
+type INITIALSTATETYPE = {
+  currentDate: FULLDATETYPE;
+  currentDisplayDate: FULLDATETYPE & TIMESTYPE;
+};
+const initialState = {
   currentDate: {
     day: new Date().getDate(),
     month: new Date().getMonth() + 1,
@@ -13,11 +31,20 @@ const contextIntialState = {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
   },
-  timeAvailability: [],
 };
-const reducerFunction = (state, action) => {
-  switch (action.type) {
-    case 'increment': {
+const CalendarContext = createContext<{
+  state: INITIALSTATETYPE;
+  dispatch: React.Dispatch<ACTIONTYPE>;
+}>({
+  state: initialState,
+  dispatch: () => null,
+});
+
+const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
+  const { type } = action;
+  switch (type) {
+    case ACTIONS.INCREMENT: {
+      console.log(state);
       if (state.currentDisplayDate.month >= 12) {
         return {
           ...state,
@@ -37,7 +64,7 @@ const reducerFunction = (state, action) => {
         };
       }
     }
-    case 'decrement': {
+    case ACTIONS.DECREMENT: {
       if (state.currentDisplayDate.month <= 1) {
         return {
           ...state,
@@ -57,16 +84,8 @@ const reducerFunction = (state, action) => {
         };
       }
     }
-    case 'select': {
-      let informationAboutThatDay;
-      let result = mockupData.find(
-        (el) =>
-          el.day === action.payload.day &&
-          el.month === action.payload.month &&
-          el.year === action.payload.year
-      );
-      informationAboutThatDay = result?.timeAvailability ?? false;
-      console.log(action.payload.month);
+    case ACTIONS.SELECT: {
+      console.log(action.payload);
       return {
         ...state,
         currentDisplayDate: {
@@ -74,12 +93,9 @@ const reducerFunction = (state, action) => {
           day: action.payload.day,
           month: action.payload.month,
           year: action.payload.year,
+          times: action.payload.times,
         },
-        timeAvailability: informationAboutThatDay,
       };
-    }
-    case 'create-booking': {
-      return { ...state };
     }
     default: {
       console.log('From default reducer case');
@@ -87,13 +103,12 @@ const reducerFunction = (state, action) => {
     }
   }
 };
-const ContextProviderComponentWithReducerAsAState = ({ children }) => {
-  const [state, dispatch] = useReducer(reducerFunction, contextIntialState);
-  const contextValue = { state, dispatch };
+const CalendarContextProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(reducerFunction, initialState);
   return (
-    <DatesContext.Provider value={contextValue}>
+    <CalendarContext.Provider value={{ state, dispatch }}>
       {children}
-    </DatesContext.Provider>
+    </CalendarContext.Provider>
   );
 };
-export { ContextProviderComponentWithReducerAsAState, DatesContext };
+export { CalendarContextProvider, CalendarContext, ACTIONS };
