@@ -19,10 +19,6 @@
   border-width: 4px;
   font-weight: bolder;
 }
-.current-day {
-  border-color: var(--main-green);
-  border-width: 4px;
-}
 .selected-day {
   border-color: var(--main-green);
   color: white;
@@ -31,9 +27,19 @@
 
 .unavailable {
   cursor: not-allowed !important;
-  border: 1px solid var(--not-available) !important;
-  color: var(--not-available) !important;
+  border: 1px solid var(--not-available);
+  color: var(--not-available);
+}
+.current-day {
+  border-color: var(--main-green);
+  border-width: 4px;
 }
 .unavailable:hover {
   font-weight: normal;
+  border: 1px solid var(--not-available);
+}
+.current-day.unavailable:hover {
+  font-weight: normal;
+  border-color: var(--main-green);
+  border-width: 4px;
 }

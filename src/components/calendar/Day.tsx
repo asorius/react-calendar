@@ -56,16 +56,16 @@ export default function Day({
   const currentDaysMonth = adjustMonth(monthQueue);
   const currentDaysYear = adjustYear(monthQueue);
   const isWeekend = weekdayName === 'sat' || weekdayName === 'sun';
-  const isFromPreviousMonthOrYear =
-    monthQueue === 'prev' && currentDaysYear < currentYear;
+  const isFromPreviousYear = currentDaysYear < currentYear;
+  const isLastMonthOfPreviousYear = monthQueue === 'prev' && isFromPreviousYear;
   const dayHasPassed =
     day < currentDayDate && currentMonth === currentDaysMonth;
-  const dayIsAvailable = !isFromPreviousMonthOrYear || !dayHasPassed;
+  const dayIsAvailable =
+    !isLastMonthOfPreviousYear && !isFromPreviousYear && !dayHasPassed;
   return (
     <div
       className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
-        (isWeekend || !dayIsAvailable || bookingInformation?.rate === 1) &&
-        'unavailable'
+        (isWeekend || !dayIsAvailable) && 'unavailable'
       }`}
       onClick={() => {
         if (isWeekend || !dayIsAvailable) return;
