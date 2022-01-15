@@ -60,14 +60,15 @@ export default function Day({
     monthQueue === 'prev' && currentDaysYear < currentYear;
   const dayHasPassed =
     day < currentDayDate && currentMonth === currentDaysMonth;
-  const unavailableDay = isFromPreviousMonthOrYear || dayHasPassed;
+  const dayIsAvailable = !isFromPreviousMonthOrYear || !dayHasPassed;
   return (
     <div
       className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
-        (isWeekend || unavailableDay) && 'unavailable'
+        (isWeekend || !dayIsAvailable || bookingInformation?.rate === 1) &&
+        'unavailable'
       }`}
-      onClick={(e) => {
-        if (isWeekend || unavailableDay) return;
+      onClick={() => {
+        if (isWeekend || !dayIsAvailable) return;
         dispatch({
           type: ACTIONS.SELECT,
           payload: {
@@ -81,7 +82,7 @@ export default function Day({
       }}
       ref={node}>
       {day}
-      {!unavailableDay && (
+      {dayIsAvailable && bookingInformation && (
         <div
           style={{
             position: 'absolute',
@@ -89,8 +90,13 @@ export default function Day({
             left: 0,
             content: '',
             width: '150%',
-            height: `${bookingInformation && bookingInformation.rate * 100}%`,
-            zIndex: -2,
+            height: `${
+              bookingInformation &&
+              (bookingInformation.rate !== 1
+                ? bookingInformation.rate * 100
+                : 120)
+            }%`,
+            zIndex: -5,
           }}
           className='box'>
           <div className='wave -one'></div>

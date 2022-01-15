@@ -40,7 +40,7 @@ function Calendar({ data }: PROPTYPES) {
             <div className='week-days-list'>
               <DaysGrid onDayClick={openerHandler} data={data}></DaysGrid>
             </div>
-            <div className='week-days-asterix'>
+            <div className='sub-text'>
               * Fully colored day represents fully booked.
             </div>
           </div>

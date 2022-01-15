@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import { CalendarContext } from './context';
-// import './styling/creation-form.css';
+import './styles/form-element.css';
 import { InputElement, ErrorElement } from '.';
-// import './styling/select-element.css';
+import './styles/select-element.css';
 export default function Form({
   handleAction,
   open,
@@ -61,7 +61,7 @@ export default function Form({
           </select>
         </div>
       )}
-      <form className='form' onSubmit={submitHandler}>
+      <form className='form-element' onSubmit={submitHandler}>
         <InputElement
           name='firstname'
           labelText='First Name'

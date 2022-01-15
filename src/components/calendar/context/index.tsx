@@ -44,6 +44,7 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
   const { type } = action;
   switch (type) {
     case ACTIONS.INCREMENT: {
+      console.log(state);
       if (state.currentDisplayDate.month >= 12) {
         return {
           ...state,
