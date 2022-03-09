@@ -11,4 +11,9 @@ body[data-theme='dark'] {
   --fill-green: #18b394a6;
   /* --dim-gray-not-current: #6b6b6bfb; */
   --not-available: #d8d8d8fb;
+  --colors-primary: #375776;
+  --colors-secondary: #fecb5e;
+  --colors-accent: #8cacb1;
+  --text-light: #fafafa;
+  --text-dark: #1f1f1f;
 }

@@ -18,9 +18,7 @@ export default function CalendarHeader() {
   const hideButton: boolean =
     new Date(year, month - 1, 1) <=
     new Date(`${currentDate.year}-${currentDate.month}-1`);
-  console.log({
-    hideButton,
-  });
+
   return (
     <div className='calendar-header'>
       {hideButton ? (

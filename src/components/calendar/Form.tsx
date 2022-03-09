@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { CalendarContext } from './context';
 import './styles/form-element.css';
 import { InputElement, ErrorElement } from '.';
@@ -18,6 +18,7 @@ export default function Form({
     email: '',
   });
   const [errorMessage, setError] = useState('');
+  const formElement = useRef<HTMLDivElement>(null);
   // const dispatch = context.dispatch;
   const date = context.state.currentDisplayDate;
   const { times } = context.state.currentDisplayDate;
@@ -33,6 +34,10 @@ export default function Form({
       [name]: value,
     });
   };
+  useEffect(
+    () => formElement.current?.scrollIntoView({ behavior: 'smooth' }),
+    []
+  );
   useEffect(() => {
     const timer = setTimeout(() => setError(''), 4000);
     return () => clearTimeout(timer);
@@ -44,7 +49,9 @@ export default function Form({
       setError('Please enter either your phone number or email address');
   };
   return (
-    <div className={`creation-form-container ${open && 'form-active'}`}>
+    <div
+      ref={formElement}
+      className={`creation-form-container ${open && 'form-active'}`}>
       <h1>
         {' '}
         Availability for {date.day}/{date.month}/{date.year}

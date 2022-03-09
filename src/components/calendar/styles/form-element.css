@@ -36,6 +36,14 @@
     transform: translateX(0%);
   }
 }
+@keyframes sliderY {
+  85% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
 @keyframes fader {
   0% {
     opacity: 0.2;
@@ -48,5 +56,10 @@
   }
 }
 .creation-form-container.form-active {
-  animation: fader 1s forwards, slider 1s forwards;
+  animation: fader 1s forwards, sliderY 1s forwards;
+}
+@media screen and (min-width: 769px) {
+  .creation-form-container.form-active {
+    animation: fader 1s forwards, slider 1s forwards;
+  }
 }
