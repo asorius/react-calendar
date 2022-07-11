@@ -7,8 +7,10 @@ body[data-theme='dark'] {
   --colors-background: black;
 } */
 :root {
-  --main-green: #16a084;
-  --fill-green: #18b394a6;
+  --main-green: #abee00;
+  /* --main-green: #16a084; */
+  --fill-green: #abee00;
+  /* --fill-green: #18b394a6; */
   /* --dim-gray-not-current: #6b6b6bfb; */
   --not-available: #d8d8d8fb;
   --colors-primary: #375776;
@@ -16,4 +18,6 @@ body[data-theme='dark'] {
   --colors-accent: #8cacb1;
   --text-light: #fafafa;
   --text-dark: #1f1f1f;
+  --bg-photo:url('../images/dentist.jpg');
+  --bg-about:url('../images/about.jpg')
 }

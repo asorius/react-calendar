@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 25rem;
   margin: 0 auto;
-  min-height: 30rem;
+  min-height: 20rem;
 }
 
 .week-days {
@@ -34,10 +34,10 @@
 
 .week-days__shortname {
   height: 100%;
-  width: 3rem;
+  width: clamp(1rem,10vw,3rem);
   text-align: center;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: clamp(.5rem,5vw,1.3rem);
 }
 
 .week-days-list > div div.selected-day:hover,
@@ -53,6 +53,6 @@
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding-top: 2rem;
+  padding-top: clamp(.5rem,10vh,2rem);
   font-size: 0.9rem;
 }

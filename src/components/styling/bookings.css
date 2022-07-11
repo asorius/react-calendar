@@ -1,0 +1,49 @@
+
+article{
+    display:grid;
+    grid-template-rows: auto 1fr;
+}
+  .slogan {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: max-content max-content;
+    gap: .5rem;
+    font-size:clamp(1rem,8vw,3rem);
+    padding-top: 1rem;
+  }
+  .slogan h2 {
+    margin: 0;
+    text-align: center;
+    line-height: .9;
+    
+    position:relative
+  }
+  .slogan h2::before {
+    content:'';
+    position:absolute;
+    bottom:-15%;
+    left:25%;
+    width: 85%;
+    height: 10px;
+    background-color: var(--main-green);
+  }
+
+  
+  @media screen and (min-width:480px){
+    /* tablet screens, from 480px */
+    
+}
+@media screen and (min-width:769px){
+    /* laptop screens, from 769px */
+
+.slogan h2{
+  writing-mode: vertical-lr;
+}
+.rotate {
+  transform: rotate(180deg);
+}
+}
+@media screen and (min-width:1025px){
+   /* desktop screens, form 1025px */
+}

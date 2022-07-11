@@ -5,7 +5,7 @@
   align-items: flex-end;
 }
 .calendar-header-date {
-  font-size: 1.5rem;
+  font-size: clamp(.5rem,10vw,1.5rem);
   text-align: center;
   padding: 1rem;
   flex-grow: 1;
