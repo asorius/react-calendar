@@ -7,7 +7,7 @@ export default function Bookings({ children }: { children: React.ReactNode }) {
         <h2 className='rotate'>Book</h2>
         <h2>Yours</h2>
       </div>
-      <div>{children}</div>
+      {children}
     </article>
   );
 }

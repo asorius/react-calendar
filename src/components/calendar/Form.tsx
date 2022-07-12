@@ -16,6 +16,7 @@ export default function Form({
     lastname: '',
     phone: '',
     email: '',
+    time: '',
   });
   const [errorMessage, setError] = useState('');
   const formElement = useRef<HTMLDivElement>(null);
@@ -44,6 +45,14 @@ export default function Form({
   }, [errorMessage]);
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const confirmmation = window.confirm(
+      `Book appointment on ${date.day}/${date.month}/${date.year} at ${values.time} ?`
+    );
+    if (confirmmation) {
+      console.log(
+        `Booked appointment on ${date} at ${values.time} for ${values.firstname} ${values.lastname}`
+      );
+    }
     values.phone.length < 8 &&
       values.email.length < 8 &&
       setError('Please enter either your phone number or email address');
@@ -56,19 +65,23 @@ export default function Form({
         {' '}
         Availability for {date.day}/{date.month}/{date.year}
       </h1>
-      {times && (
-        <div className='time-selection'>
-          <label htmlFor='time-select'>Choose time : </label>
-          <select name='time' id='time-select' onChange={handleInputChange}>
-            {times.map((time, i) => (
-              <option key={i} value={time}>
-                {time}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
       <form className='form-element' onSubmit={submitHandler}>
+        {times && (
+          <div className='time-selection'>
+            <label htmlFor='time-select'>Available times : </label>
+            <select
+              name='time'
+              id='time-select'
+              onChange={handleInputChange}
+              required>
+              {times.map((time, i) => (
+                <option key={i} value={time}>
+                  {time}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <InputElement
           name='firstname'
           labelText='First Name'
@@ -101,6 +114,7 @@ export default function Form({
         <div className='form-buttons'>
           <button
             type='submit'
+            className='form-button submit-button'
             disabled={
               values.firstname.length <= 2 || values.lastname.length <= 2
             }>
@@ -113,7 +127,7 @@ export default function Form({
               e.preventDefault();
               handleAction(false);
             }}>
-            Close
+            Cancel
           </button>
         </div>
       </form>
