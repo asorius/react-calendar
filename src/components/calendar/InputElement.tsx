@@ -20,6 +20,7 @@ export default function InputElement({
   type = 'text',
   required = false,
 }: PROPTYPES) {
+  const [focused, setFocus] = React.useState(false);
   return (
     <div className='input-element'>
       <label className='input-label' htmlFor={name}>
