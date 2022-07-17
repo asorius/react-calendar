@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import generateData from './components/utils';
 import Header from './components/Header';
 import Bookings from './components/Bookings';
+import About from './components/About';
 const mockupData = generateData();
 function App() {
   const [data, setData] = useState<typeof mockupData>([]);
@@ -19,6 +20,7 @@ function App() {
         <Bookings>
           <Calendar data={data}></Calendar>
         </Bookings>
+        <About></About>
       </div>
     </div>
   );
