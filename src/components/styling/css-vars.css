@@ -17,7 +17,8 @@ body[data-theme='dark'] {
   --colors-secondary: #fecb5e;
   --colors-accent: #8cacb1;
   --text-light: #fafafa;
+  --action-color: #9e06df87;
   --text-dark: #1f1f1f;
-  --bg-photo:url('../images/dentist.jpg');
-  --bg-about:url('../images/about.jpg')
+  --bg-photo: url('../images/dentist.jpg');
+  --bg-about: url('../images/about.jpg');
 }
