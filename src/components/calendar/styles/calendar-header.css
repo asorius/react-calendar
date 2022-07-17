@@ -3,11 +3,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
+  padding-bottom: 1rem;
 }
 .calendar-header-date {
-  font-size: 1.5rem;
+  font-size: clamp(0.5rem, 10vw, 1.5rem);
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem;
   flex-grow: 1;
 }
 .display-month {
@@ -20,23 +21,25 @@
   border-width: 4px;
   font-weight: bolder;
 }
-.button-select {
+.calendar-container .button-select {
+  --btn-dimensions: clamp(0.5rem, 5vh, 3rem);
   background-color: transparent;
-  height: 3rem;
-  width: 3rem;
+  height: var(--btn-dimensions);
+  width: var(--btn-dimensions);
   margin: 0 1rem;
   border-radius: 5rem;
   transition: all 0.5s linear;
 }
-.button-select.hidden {
+.calendar-container .button-select.hidden {
   opacity: 0;
 }
 .button-select:hover {
   background-color: var(--main-green);
 }
-.button-select img {
-  height: 1.2rem;
+.calendar-container .button-select img {
+  height: clamp(0.5rem, 5vh, 1.2rem);
+  margin: 0 auto;
 }
-.button-select.left img {
-  transform: rotate(180deg);
+.calendar-container .button-select.left img {
+  transform: rotate(180deg) translateX(25%);
 }

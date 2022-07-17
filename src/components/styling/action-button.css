@@ -1,0 +1,42 @@
+button {
+  margin: 4rem auto 0;
+  font-family: inherit;
+}
+.header a {
+  margin: 0 auto;
+}
+.fill {
+  --border-r: 8px;
+  font-size: 20px;
+  height: 3rem;
+  width: 10rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+  /* padding: 3vw 7vw 3vw; */
+  outline: 0;
+  border: 1px solid white;
+  border-radius: var(--border-r);
+  cursor: pointer;
+  position: relative;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 0;
+}
+
+.fill::after {
+  content: '';
+  background-color: var(--action-color);
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  border-radius: var(--border-r);
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.fill:hover::after {
+  top: 0px;
+  left: 0px;
+}

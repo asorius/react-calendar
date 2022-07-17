@@ -4,36 +4,9 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 .App {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-}
-button {
-  cursor: pointer;
-  margin: 0;
-  padding: 0.5rem;
-  text-transform: uppercase;
-  border: 1px solid var(--main-green);
-  border-radius: 1rem;
-  margin: 1rem;
-  background: white;
-  transition: all 0.5s;
-}
-
-button:hover {
-  border: 1px solid white;
-  background: var(--main-green);
-  color: white;
-}
-button:disabled {
-  background: white;
-  color: lightgray;
-}
-button:disabled:hover {
-  cursor: not-allowed;
-  border: 1px solid var(--main-green);
-}
-label {
-  font-size: 1.2rem;
 }

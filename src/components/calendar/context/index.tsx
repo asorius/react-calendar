@@ -44,7 +44,6 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
   const { type } = action;
   switch (type) {
     case ACTIONS.INCREMENT: {
-      console.log(state);
       if (state.currentDisplayDate.month >= 12) {
         return {
           ...state,
@@ -85,7 +84,6 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
       }
     }
     case ACTIONS.SELECT: {
-      console.log(action.payload);
       return {
         ...state,
         currentDisplayDate: {
@@ -98,7 +96,6 @@ const reducerFunction = (state: typeof initialState, action: ACTIONTYPE) => {
       };
     }
     default: {
-      console.log('From default reducer case');
       return state;
     }
   }

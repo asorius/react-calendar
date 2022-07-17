@@ -8,7 +8,7 @@ type PROPTYPES = {
   name: string;
   validationMessage?: string;
   value: string;
-  type?: string;
+  type?: 'text' | 'email' | 'tel';
   required?: boolean;
 };
 export default function InputElement({
@@ -20,24 +20,26 @@ export default function InputElement({
   type = 'text',
   required = false,
 }: PROPTYPES) {
+  const [focused, setFocus] = React.useState(false);
   return (
-    <div className='input-element'>
-      <label className='input-label' htmlFor={name}>
+    <div className={`input-element`}>
+      <label
+        className={`input-label ${focused || value ? 'active' : ''} `}
+        htmlFor={name}>
         {labelText}
       </label>
       <input
         type={type}
         onChange={changeHandler}
         name={name}
+        onFocus={() => setFocus(!focused)}
+        onBlur={() => setFocus(!focused)}
         value={value}
-        // label={labelText}
         required={required}
+        minLength={2}
+        maxLength={type === 'email' ? 30 : 15}
+        pattern={type === 'email' ? undefined : '[A-Za-z0-9]+'}
         aria-required={required}></input>
-      <p className='validation-element'>
-        {value.length <= 2 && value.length !== 0
-          ? 'Entered text is too short'
-          : ''}
-      </p>
     </div>
   );
 }
