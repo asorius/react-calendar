@@ -1,0 +1,101 @@
+#Contacts {
+  display: grid;
+  place-content: center;
+}
+#Contacts h1 {
+  margin: 4rem auto;
+  z-index: 2;
+}
+#Contacts h1::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  right: 50%;
+  width: 50%;
+  height: 10px;
+  background-color: var(--main-green);
+}
+.phone {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-number {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+.phone-number svg {
+  height: 3rem;
+  fill: transparent;
+  stroke: #6dcd7d;
+  width: 3rem;
+  margin-right: 0.5rem;
+}
+.phone-number a {
+  /* text-decoration: none; */
+  color: black;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  place-items: center;
+}
+.map-container {
+  width: 100%;
+}
+@media screen and (min-width: 480px) {
+  /* tablet screens, from 480px */
+  #Contacts .container {
+    display: grid;
+    place-content: center;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+  .container h2 {
+    text-align: center;
+  }
+  .phone-number {
+    padding-top: 4rem;
+  }
+  .map-container {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .phone {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+@media screen and (min-width: 769px) {
+  /* laptop screens, from 769px */
+
+  #Contacts .contacts-container {
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+  }
+  .container h2 {
+    text-align: center;
+  }
+  .phone-number {
+    padding-top: 0;
+  }
+  .map-container {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .phone {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .map {
+    width: 40rem;
+  }
+}
+@media screen and (min-width: 1025px) {
+  /* desktop screens, from 1025px */
+}

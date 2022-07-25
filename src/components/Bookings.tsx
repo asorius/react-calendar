@@ -2,10 +2,10 @@ import React from 'react';
 import './styling/bookings.css';
 export default function Bookings({ children }: { children: React.ReactNode }) {
   return (
-    <article>
+    <article id='Bookings'>
       <div className='slogan'>
-        <h2 className='rotate'>Book</h2>
-        <h2>
+        <h1 className='rotate'>Book</h1>
+        <h1>
           Yours
           <svg
             width='130'
@@ -26,7 +26,7 @@ export default function Bookings({ children }: { children: React.ReactNode }) {
               fill='inherit'
             />
           </svg>
-        </h2>
+        </h1>
       </div>
       {children}
     </article>

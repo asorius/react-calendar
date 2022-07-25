@@ -53,19 +53,32 @@ export default function Day({
       }
     }
   };
-  const currentDaysMonth = adjustMonth(monthQueue);
+  const currentlyMountedDaysMonthValue = adjustMonth(monthQueue);
   const currentDaysYear = adjustYear(monthQueue);
   const isWeekend = weekdayName === 'sat' || weekdayName === 'sun';
   const isFromPreviousYear = currentDaysYear < currentYear;
   const isLastMonthOfPreviousYear = monthQueue === 'prev' && isFromPreviousYear;
-  const dayHasPassed =
-    day < currentDayDate && currentMonth === currentDaysMonth;
+  const dayHasPassed = () => {
+    if (currentlyMountedDaysMonthValue < currentMonth) {
+      //check for only previous month
+      return true;
+    } else if (
+      day <= currentDayDate &&
+      currentlyMountedDaysMonthValue <= currentMonth
+    ) {
+      //check for current month already passed days
+      return true;
+    } else {
+      return false;
+    }
+  };
   const dayIsAvailable =
-    !isLastMonthOfPreviousYear && !isFromPreviousYear && !dayHasPassed;
+    !isLastMonthOfPreviousYear && !isFromPreviousYear && !dayHasPassed();
+
   return (
     <div
       className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
-        (isWeekend || !dayIsAvailable) && 'unavailable'
+        isWeekend || !dayIsAvailable ? 'unavailable' : ''
       }`}
       onClick={() => {
         if (isWeekend || !dayIsAvailable) return;
@@ -73,7 +86,7 @@ export default function Day({
           type: ACTIONS.SELECT,
           payload: {
             day,
-            month: currentDaysMonth,
+            month: currentlyMountedDaysMonthValue,
             year: currentDaysYear,
             times: bookingInformation && bookingInformation.times,
           },

@@ -33,9 +33,6 @@
   .header {
     border-radius: 0 0 55% 55% / 14%;
   }
-  .header h1 {
-    color: red;
-  }
 }
 @media screend and (min-width: 769px) {
   .header {

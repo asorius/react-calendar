@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import generateData from './components/utils';
 import Header from './components/Header';
 import Bookings from './components/Bookings';
-import About from './components/About';
+import Contacts from './components/Contacts';
 const mockupData = generateData();
 function App() {
   const [data, setData] = useState<typeof mockupData>([]);
@@ -15,12 +15,12 @@ function App() {
   }, []);
   return (
     <div className='App'>
-      <div>
-        <Header />
+      <Header />
+      <div className='container'>
         <Bookings>
           <Calendar data={data}></Calendar>
         </Bookings>
-        <About></About>
+        <Contacts></Contacts>
       </div>
     </div>
   );

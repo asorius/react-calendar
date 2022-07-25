@@ -61,10 +61,10 @@ export default function Form({
     <div
       ref={formElement}
       className={`creation-form-container ${open && 'form-active'}`}>
-      <h1>
+      <h2>
         {' '}
         Availability for {date.day}/{date.month}/{date.year}
-      </h1>
+      </h2>
       <form className='form-element' onSubmit={submitHandler}>
         {times && (
           <div className='time-selection'>

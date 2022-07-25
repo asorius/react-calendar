@@ -76,7 +76,7 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
       }
     };
 
-    //First loop to create day objects for previous month days that overflow into current
+    //Firstly, loop to create day objects for previous month days that overflow into current
     for (
       let i = 0;
       i < amountOfDaysBeforeFirstDayOfCurrentlyDisplayedMonth;
@@ -95,7 +95,7 @@ const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
         isCurrentDay: false,
       });
     }
-    //Loop to create day objects for currently displayed month
+    //Secondly,loop to create day objects for currently displayed month
     for (let i = 1; i <= daysInCurrentlyDisplayedMonth; i++) {
       //dayCounter used to determine weekday. The loop iterates 28-31 times depending on total days in month. dayCounter=(i + index of the first day of the month -1[cause i started the loop at 1]) % 7[meaning i-days from the first weekday index(1-7), the remainder accounts for i-day weekday index, and in case remainder is 0 , that means its sunday therefore the fallback to hard coded 7]
       let dayCounter = (i + weekdayIndexofFirstday - 1) % 7 || 7;

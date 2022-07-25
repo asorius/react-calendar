@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
+  --multiplier: 2;
 }
 
 .wave {
@@ -15,15 +16,15 @@
   margin-top: 5px;
   transform-origin: 50% 48%;
   border-radius: 43%;
-  animation: drift 3000ms infinite linear;
+  animation: drift calc(var(--multiplier) * 2) infinite linear;
 }
 
 .wave.-three {
-  animation: drift 5000ms infinite linear;
+  animation: drift calc(var(--multiplier) * 2.5) infinite linear;
   transform: translateX(-25%);
 }
-*/ .wave.-two {
-  animation: drift 7000ms infinite linear;
+.wave.-two {
+  animation: drift calc(var(--multiplier) * 3.5) infinite linear;
   opacity: 0.1;
   transform: translateX(25%);
 

@@ -21,4 +21,8 @@ body[data-theme='dark'] {
   --text-dark: #1f1f1f;
   --bg-photo: url('../images/dentist.jpg');
   --bg-about: url('../images/about.jpg');
+  --h1-size: clamp(2rem, 15vw, 4rem);
+  --tablets: 480px;
+  --laptops: 769px;
+  --desktops: 1025px;
 }

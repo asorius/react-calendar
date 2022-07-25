@@ -7,7 +7,7 @@ const MainHeader = () => {
       <h2>Staffordshire</h2>
       <a href='#about'>
         <button type='button' className='fill'>
-          Find us
+          Contact us
         </button>
       </a>
     </div>

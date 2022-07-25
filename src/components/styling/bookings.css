@@ -9,18 +9,11 @@ article {
   align-content: center;
   grid-template-columns: max-content max-content;
   gap: 0.5rem;
-  font-size: clamp(1rem, 8vw, 3rem);
+  font-size: var(--h1-size);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-.slogan h2 {
-  margin: 0;
-  text-align: center;
-  line-height: 0.9;
-
-  position: relative;
-}
-.slogan h2::before {
+.slogan h1::before {
   content: '';
   position: absolute;
   bottom: -15%;
@@ -45,11 +38,24 @@ article {
 @media screen and (min-width: 769px) {
   /* laptop screens, from 769px */
 
-  .slogan h2 {
+  .slogan h1 {
     writing-mode: vertical-lr;
   }
   .rotate {
     transform: rotate(180deg);
+  }
+  .arrow {
+    transform: rotate(360deg);
+    top: -50%;
+    right: -100%;
+  }
+
+  #Bookings {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    width: 60%;
   }
 }
 @media screen and (min-width: 1025px) {
