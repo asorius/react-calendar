@@ -21,7 +21,8 @@ export default function Day({
 }: PROPTYPES) {
   const context = useContext(CalendarContext);
   const dispatch = context.dispatch;
-  const node = React.useRef<HTMLDivElement>(null);
+  const [lastFocus, setLastFocus] = React.useState<React.ReactNode>(null);
+  const dayElement = React.useRef<HTMLButtonElement>(null);
   const { month, year } = context.state.currentDisplayDate;
   const currentYear = context.state.currentDate.year;
   const currentMonth = context.state.currentDate.month;
@@ -60,7 +61,7 @@ export default function Day({
   const isLastMonthOfPreviousYear = monthQueue === 'prev' && isFromPreviousYear;
   const dayHasPassed = () => {
     if (currentlyMountedDaysMonthValue < currentMonth) {
-      //check for only previous month
+      //check for previous month
       return true;
     } else if (
       day <= currentDayDate &&
@@ -76,10 +77,12 @@ export default function Day({
     !isLastMonthOfPreviousYear && !isFromPreviousYear && !dayHasPassed();
 
   return (
-    <div
+    <button
       className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
         isWeekend || !dayIsAvailable ? 'unavailable' : ''
       }`}
+      tabIndex={!isWeekend && dayIsAvailable ? 0 : 1}
+      title={`${day}-${month}-${year}`}
       onClick={() => {
         if (isWeekend || !dayIsAvailable) return;
         dispatch({
@@ -92,8 +95,9 @@ export default function Day({
           },
         });
         onClickAction(true);
+        setLastFocus(dayElement);
       }}
-      ref={node}>
+      ref={dayElement}>
       {day}
       {dayIsAvailable && bookingInformation && (
         <div
@@ -117,6 +121,6 @@ export default function Day({
           <div className='wave -three'></div>
         </div>
       )}
-    </div>
+    </button>
   );
 }

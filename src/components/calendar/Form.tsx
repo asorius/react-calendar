@@ -123,6 +123,7 @@ export default function Form({
           <button
             className='button'
             type='button'
+            autoFocus={open}
             onClick={(e) => {
               e.preventDefault();
               handleAction(false);

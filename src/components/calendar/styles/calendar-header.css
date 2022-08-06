@@ -27,19 +27,25 @@
   height: var(--btn-dimensions);
   width: var(--btn-dimensions);
   margin: 0 1rem;
-  border-radius: 5rem;
-  transition: all 0.5s linear;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  transition: all 0.2s linear;
 }
 .calendar-container .button-select.hidden {
   opacity: 0;
 }
 .button-select:hover {
-  background-color: var(--main-green);
+  background-color: var(--colors-secondary);
+  cursor: pointer;
 }
-.calendar-container .button-select img {
-  height: clamp(0.5rem, 5vh, 1.2rem);
+.button-select:hover svg {
+  fill: var(--action-color);
+}
+.calendar-container .button-select svg {
+  height: clamp(0.5rem, 6vh, 1.5rem);
+  stroke-width: 0.1rem;
   margin: 0 auto;
 }
-.calendar-container .button-select.left img {
-  transform: rotate(180deg) translateX(25%);
+.calendar-container .button-select.left svg {
+  transform: rotate(180deg);
 }

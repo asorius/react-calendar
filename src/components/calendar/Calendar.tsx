@@ -24,7 +24,7 @@ function Calendar({ data }: PROPTYPES) {
   };
 
   return (
-    <div className='calendar-container'>
+    <article className='calendar-container'>
       <CalendarContextProvider>
         <div
           className={`form-weekday-container ${
@@ -49,7 +49,7 @@ function Calendar({ data }: PROPTYPES) {
           <Form open={creationIsOpen} handleAction={openerHandler}></Form>
         )}
       </CalendarContextProvider>
-    </div>
+    </article>
   );
 }
 

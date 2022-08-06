@@ -5,6 +5,7 @@
   position: relative;
   height: var(--dimension);
   width: var(--dimension);
+  background: transparent;
   text-align: center;
   border: 1px solid #afafaffb;
   font-size: clamp(0.5rem, 4vw, 1.5rem);

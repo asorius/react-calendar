@@ -24,9 +24,16 @@ const monthNames = [
   'December',
 ];
 const arrowImage = (
-  <img
-    src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAACWUlEQVRYhcWXwWsTQRTGv8na0JS0l0Lp7jaHiiBYL503wYsapbQ9eag0ghcV/AM8iP+BoHgt6kWQKkIpFARBPAj2EkICi6wHEVEQITMJEi0kEEvLPi/1IuIm2834nb+Z78ebt292gBgR0Tul1GKcL6kycQZmvsXMm0qpc8MAcOIMxpjPrut+BLDhum7FGPPVKsABxAff9z8BeDYzM/NGa62tAgCA1vq953ktZn7qed5rY4yxCgAAxpjQ9/02gMfT09Mvm83mN6sAAKC1fut53p4Q4pHv+y+01m2rAABgjKl5nscA7hcKheeNRmPHKsABRNV13Ulmvjc1NbXVarU6SfYRSQF+i4juArgIoBQEwcCNeWgAAEIptcbMZx3HOV+v1wfqiTQAAEBIKR8KIU5ls9mFarX63TYAAGSUUuvMfGx0dHSpUqn01ROxd8EAimZnZ68x85der/dqbm4u38+iNCsAACCiESHEVhRFuYmJiQvb29s//+VPswIAgCAI9vL5/CUhRNTpdDbi/KkD/CG2DkBEI91ud5OZM+Pj45etApTLZYeZn0RRNLm7u7sSd/7AIUbxX5QZGxtbB3A0l8stB0HQ7WfRkZTChZTyATOfzGazC/3OACCdCgil1BqA047jLNRqtb6nIJBCBYjoDjMvASgNeg8cGkBKeRvA6v7+fikMw0S/aIm/AiK6KYS44jjOYhiGjaT7JA2/QURNpdRxq8EAoJS6TkSt+fn5E9bDiegqEbWJSFoPV0qtElG7WCwWrYdLKVeIaEdKeeZ/hC8T0Y9hPU5jNezn+S/II90FBF8/SQAAAABJRU5ErkJggg=='
-    alt='arrow'
-  />
+  <svg
+    aria-hidden='true'
+    className='w-5 h-5'
+    fill='currentColor'
+    viewBox='0 0 20 20'
+    xmlns='http://www.w3.org/2000/svg'>
+    <path
+      fillRule='evenodd'
+      d='M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z'
+      clipRule='evenodd'></path>
+  </svg>
 );
 export { dayNames, monthNames, arrowImage };
