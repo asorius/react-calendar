@@ -34,7 +34,7 @@ function App() {
     return () => window.removeEventListener('scroll', debounce(scrollWatcher));
   }, []);
   return (
-    <div className='App scroll-smooth '>
+    <div className='App '>
       <ToTop visible={toTopVisible} />
       <Header />
       <About />

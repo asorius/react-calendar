@@ -11,7 +11,9 @@ export default function About() {
     description,
   }));
   return (
-    <section className=' body-font bg-gradient-to-br from-main to-accent'>
+    <section
+      id='About'
+      className=' body-font bg-gradient-to-br from-main to-accent'>
       <div className='container px-5 py-24 mx-auto'>
         <div className='flex flex-col text-center w-full mb-20'>
           <h1 className={headerClasses + '  text-text-lighter'}>{title}</h1>

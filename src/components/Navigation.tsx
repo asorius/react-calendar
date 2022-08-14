@@ -13,10 +13,10 @@ export default function Navigation() {
   }, []);
 
   return (
-    <div className='w-full p-2 grid place-items-center shadow grow-0 '>
+    <div className='w-full p-2 grid place-items-center shadow grow-0 relative'>
       <div ref={logo} className='logo'>
         <a
-          href='#header'
+          href='#home'
           className='flex title-font font-medium items-center text-gray-900 mb-0 md:mb-0'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

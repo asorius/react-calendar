@@ -17,7 +17,7 @@ export default function About() {
     }));
   };
   return (
-    <section className='body-font relative mt-20'>
+    <section id='Contacts' className='body-font relative mt-20'>
       <div className='container mx-auto'>
         <h1 className={headerClasses}>Contact us</h1>
         <div className=' px-5 py-24  flex sm:flex-nowrap flex-wrap'>

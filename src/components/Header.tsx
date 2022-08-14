@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 // import './styling/action-button.css';
 const MainHeader = () => {
   return (
-    <header id='header' className='text-gray-600 min-h-screen flex flex-col'>
+    <header id='Home' className='text-gray-600 min-h-screen flex flex-col'>
       <Navigation />
       <Hero />
     </header>

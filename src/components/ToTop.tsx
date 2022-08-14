@@ -8,7 +8,7 @@ export default function ToTop({ visible }: { visible: boolean }) {
       className={` grid content-center drop-shadow-lg border border-black/10 z-10 duration-500 fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full h-10 p-1 bg-gray-light/50 ${
         visible ? 'translate-y-0 opacity-100' : '-translate-y-5 opacity-0'
       }`}
-      href='#header'>
+      href='#home'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         ref={svgElement}
