@@ -76,4 +76,5 @@ const useObserver = (): [
 
   return [containerRef, isVisible];
 };
+
 export { generateData, gsapFade, headerClasses, useObserver };

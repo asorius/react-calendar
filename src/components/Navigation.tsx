@@ -13,7 +13,7 @@ export default function Navigation() {
   }, []);
 
   return (
-    <div className='w-full p-2 grid place-items-center shadow grow-0'>
+    <div className='w-full p-2 grid place-items-center shadow grow-0 '>
       <div ref={logo} className='logo'>
         <a
           href='#header'
