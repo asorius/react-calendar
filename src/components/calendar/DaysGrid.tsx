@@ -14,22 +14,22 @@ type PROPTYPES = {
   onDayClick: (showelement: boolean) => void;
   data: DATAELEMENTTYPE[];
 };
-type OBJECTTYPES = {
+type DayObjectTypes = {
   dayNumber: number;
   monthNumber: number;
   year: number;
   weekdayName: string;
-  monthQueue: string;
+  monthQueue: 'prev' | 'current-month' | 'next';
   isCurrentDay: boolean;
   bookingInformation?: { rate: number; times: string[] };
 };
 const DaysGrid = ({ onDayClick, data }: PROPTYPES) => {
-  const [dayObjectsList, updateList] = useState<OBJECTTYPES[] | []>([]);
+  const [dayObjectsList, updateList] = useState<DayObjectTypes[] | []>([]);
   const context = useContext(CalendarContext);
   const { year, month } = context.state.currentDisplayDate;
   useEffect(() => {
     const { currentDate } = context.state;
-    let list: OBJECTTYPES[] = [];
+    let list: DayObjectTypes[] = [];
     //Days in current month
     const daysInCurrentlyDisplayedMonth = new Date(year, month, 0).getDate();
 

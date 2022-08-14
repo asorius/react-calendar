@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { CalendarContext } from './context';
-import './styles/form-element.css';
 import { InputElement, ErrorElement } from '.';
-import './styles/select-element.css';
+
+import { FormButton } from './utils';
+// import { useObserver } from '../utils/index';
 export default function Form({
   handleAction,
   open,
@@ -19,8 +20,6 @@ export default function Form({
     time: '',
   });
   const [errorMessage, setError] = useState('');
-  const formElement = useRef<HTMLDivElement>(null);
-  // const dispatch = context.dispatch;
   const date = context.state.currentDisplayDate;
   const { times } = context.state.currentDisplayDate;
   useEffect(() => {
@@ -35,15 +34,12 @@ export default function Form({
       [name]: value,
     });
   };
-  useEffect(
-    () => formElement.current?.scrollIntoView({ behavior: 'smooth' }),
-    []
-  );
+
   useEffect(() => {
     const timer = setTimeout(() => setError(''), 4000);
     return () => clearTimeout(timer);
   }, [errorMessage]);
-  const submitHandler = (e: React.SyntheticEvent) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     const confirmmation = window.confirm(
       `Book appointment on ${date.day}/${date.month}/${date.year} at ${values.time} ?`
@@ -59,19 +55,27 @@ export default function Form({
   };
   return (
     <div
-      ref={formElement}
-      className={`creation-form-container ${open && 'form-active'}`}>
-      <h2>
+      className={`creation-form-container duration-700 absolute top-0 left-0 bg-white rounded-md border border-gray-darken ${
+        open ? 'translate-x-0 opacity-100 z-20' : 'translate-x-full opacity-0'
+      } `}>
+      <h2 className='text-center py-4 italic font-semibold'>
         {' '}
         Availability for {date.day}/{date.month}/{date.year}
       </h2>
-      <form className='form-element' onSubmit={submitHandler}>
+      <form
+        className='form-element grid grid-flow-row'
+        onSubmit={submitHandler}>
         {times && (
-          <div className='time-selection'>
-            <label htmlFor='time-select'>Available times : </label>
+          <div className='time-selection text-right py-4'>
+            <label
+              htmlFor='time-select'
+              className='text-sm  underline decoration-accent/50 underline-offset-8'>
+              Available times :{' '}
+            </label>
             <select
               name='time'
               id='time-select'
+              className='rounded-md mx-2 px-1 bg-gray-light border border-gray-darken/75'
               onChange={handleInputChange}
               required>
               {times.map((time, i) => (
@@ -106,30 +110,28 @@ export default function Form({
           value={values.phone}
           type='tel'
           changeHandler={handleInputChange}></InputElement>
-        <p className='sub-text'>
-          * We will send confirmation to either either your phone or email
+        <p className='italic text-gray-darken text-xs text-center block py-4 w-5/6 mx-auto'>
+          * We will send confirmation to either your phone or email
         </p>
         {errorMessage && <ErrorElement message={errorMessage} />}
 
-        <div className='form-buttons'>
-          <button
+        <div className='form-buttons grid grid-flow-col gap-2 justify-center py-6 px-2 w-full'>
+          <FormButton
             type='submit'
-            className='form-button submit-button'
             disabled={
               values.firstname.length <= 2 || values.lastname.length <= 2
             }>
             Submit
-          </button>
-          <button
-            className='button'
-            type='button'
+          </FormButton>
+          <FormButton
+            cancel={true}
             autoFocus={open}
-            onClick={(e) => {
+            onClick={(e: React.SyntheticEvent) => {
               e.preventDefault();
               handleAction(false);
             }}>
             Cancel
-          </button>
+          </FormButton>
         </div>
       </form>
     </div>

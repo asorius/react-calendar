@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CalendarContext, ACTIONS } from './context';
-import { monthNames, arrowImage } from './utils';
-import './styles/calendar-header.css';
+import { monthNames, CalendarHeaderButton } from './utils';
+// import './styles/calendar-header.css';
 
 export default function CalendarHeader() {
   const context = useContext(CalendarContext);
@@ -15,27 +15,26 @@ export default function CalendarHeader() {
     //in case of previously opened creation form, close it
     // creationHandler(false);
   };
+
   const hideButton: boolean =
     new Date(year, month - 1, 1) <=
     new Date(`${currentDate.year}-${currentDate.month}-1`);
 
   return (
-    <div className='calendar-header'>
-      {hideButton ? (
-        <div className='button-select hidden'></div>
-      ) : (
-        <button className='button-select left' onClick={() => actionFn('dec')}>
-          {arrowImage}
-        </button>
-      )}
-
-      <div className='calendar-header-date'>
-        <div className='display-year'>{year}</div>
-        <div className='display-month'>{monthNames[month]}</div>
+    <div className='calendar-header flex flex-row items-center py-4'>
+      <CalendarHeaderButton
+        onclick={actionFn}
+        type='dec'
+        hide={hideButton}></CalendarHeaderButton>
+      <div className='calendar-header-date grow flex flex-col items-center'>
+        <div className='display-year font-bold py-1'>{year}</div>
+        <div className='display-month pb-1 underline underline-offset-8 decoration-accent'>
+          {monthNames[month]}
+        </div>
       </div>
-      <button className='button-select' onClick={() => actionFn('inc')}>
-        {arrowImage}
-      </button>
+      <CalendarHeaderButton
+        type='inc'
+        onclick={actionFn}></CalendarHeaderButton>
     </div>
   );
 }

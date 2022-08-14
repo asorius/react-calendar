@@ -1,16 +1,17 @@
 import React from 'react';
 import { CalendarContext, ACTIONS } from './context';
 import { useContext } from 'react';
-import './styles/day-element.css';
-import './styles/waves-element.css';
+// import './styles/day-element.css';
+// import './styles/waves-element.css';
 type PROPTYPES = {
   day: number;
-  monthQueue: string;
+  monthQueue: 'prev' | 'current-month' | 'next';
   isCurrentDay: boolean;
   weekdayName: string | false;
   bookingInformation?: { rate: number; times: string[] };
   onClickAction: (show: boolean) => void;
 };
+
 export default function Day({
   day,
   monthQueue,
@@ -74,15 +75,25 @@ export default function Day({
     }
   };
   const dayIsAvailable =
-    !isLastMonthOfPreviousYear && !isFromPreviousYear && !dayHasPassed();
+    !isLastMonthOfPreviousYear &&
+    !isFromPreviousYear &&
+    !dayHasPassed() &&
+    bookingInformation?.rate !== 1;
 
   return (
     <button
-      className={`day ${monthQueue} ${isCurrentDay && 'current-day'} ${
-        isWeekend || !dayIsAvailable ? 'unavailable' : ''
+      className={`disabled:cursor-not-allowed relative border w-8 h-8 rounded-br-md day ${
+        isCurrentDay
+          ? 'border-dashed border-2 border-main text-main bg-main/10'
+          : 'border-solid'
+      } ${
+        isWeekend || !dayIsAvailable
+          ? 'unavailable border-gray-darken/50 text-gray-darken/40'
+          : 'border-gray-600'
       }`}
       tabIndex={!isWeekend && dayIsAvailable ? 0 : 1}
       title={`${day}-${month}-${year}`}
+      disabled={isWeekend || !dayIsAvailable}
       onClick={() => {
         if (isWeekend || !dayIsAvailable) return;
         dispatch({
@@ -102,24 +113,14 @@ export default function Day({
       {dayIsAvailable && bookingInformation && (
         <div
           style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            content: '',
-            width: '150%',
             height: `${
               bookingInformation &&
               (bookingInformation.rate !== 1
                 ? bookingInformation.rate * 100
-                : 120)
+                : 100)
             }%`,
-            zIndex: -5,
           }}
-          className='box'>
-          <div className='wave -one'></div>
-          <div className='wave -two'></div>
-          <div className='wave -three'></div>
-        </div>
+          className={`box rounded-br-md bg-main/70 absolute bottom-0 left-0 content-[""] w-full -z-5`}></div>
       )}
     </button>
   );

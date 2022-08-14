@@ -36,4 +36,47 @@ const arrowImage = (
       clipRule='evenodd'></path>
   </svg>
 );
-export { dayNames, monthNames, arrowImage };
+interface FormButtonPropTypes {
+  type?: 'submit';
+  cancel?: boolean;
+  autoFocus?: boolean;
+  onClick?: (e: React.SyntheticEvent) => void;
+  children: React.ReactNode;
+  disabled?: boolean;
+}
+const FormButton = (props: FormButtonPropTypes) => (
+  <button
+    className={`rounded-md px-3.5 py-2 my-1 mx-auto overflow-hidden relative group cursor-pointer border-2 font-medium max-w-[10rem] ${
+      props.cancel ? 'border-gray-800 text-gray-800' : 'border-main text-main'
+    } disabled:border-gray-darken/50  disabled:text-gray-darken/50`}
+    {...props}>
+    <span
+      className={`absolute w-[40rem] h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 ${
+        props.cancel ? 'bg-gray-darken/75' : 'bg-main'
+      } top-1/2 group-hover:h-64 group-hover:-translate-y- 32 ease`}></span>
+    <span className='relative  transition duration-300 group-hover:text-white ease'>
+      {props.children}
+    </span>
+  </button>
+);
+const CalendarHeaderButton = ({
+  onclick,
+  hide,
+  type,
+}: {
+  onclick: (v: string) => void;
+  hide?: boolean;
+  type: string;
+}) => (
+  <button
+    className={`button-select ${
+      hide ? 'opacity-0' : 'opacity-100'
+    } w-8 h-8 m-2 inline-flex items-center justify-center duration-200 rounded-full bg-gray-light/50 border border-gray-darken/50 text-accent hover:bg-main/80 hover:text-gray-light mb-4 ${
+      type === 'dec' ? 'rotate-180' : 'rotate-0'
+    }`}
+    onClick={() => onclick(type)}>
+    {arrowImage}
+  </button>
+);
+
+export { dayNames, monthNames, arrowImage, FormButton, CalendarHeaderButton };

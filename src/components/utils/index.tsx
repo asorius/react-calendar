@@ -1,33 +1,5 @@
-// const mockupData = [
-//   {
-//     day: 28,
-//     month: 1,
-//     year: 2022,
-//     timeAvailability: ['13:00', '14:00'],
-//     bookRate: 0.7,
-//   },
-//   {
-//     day: 26,
-//     month: 1,
-//     year: 2022,
-//     bookRate: 0.1,
-//     timeAvailability: ['09:00', '10:00'],
-//   },
-//   {
-//     day: 23,
-//     month: 1,
-//     year: 2022,
-//     bookRate: 0.3,
-//     timeAvailability: ['09:00', '10:00', '13:00'],
-//   },
-//   {
-//     day: 31,
-//     month: 1,
-//     year: 2022,
-//     bookRate: 1,
-//     timeAvailability: ['09:00', '10:00', '11:00', '12:00'],
-//   },
-// ];
+import React from 'react';
+import { gsap } from 'gsap';
 interface Data {
   day: number;
   month: number;
@@ -73,4 +45,35 @@ const generateData = () => {
   });
   return replaced;
 };
-export default generateData;
+const gsapFade = (element: HTMLDivElement | null, delay = 0.5) =>
+  gsap.from(element, {
+    opacity: 0,
+    duration: 0.8,
+    delay,
+  });
+
+const headerClasses =
+  'sm:text-4xl text-3xl font-medium text-center title-font  mb-4';
+
+const useObserver = (): [
+  containerRef: React.RefObject<any>,
+  isVisible: boolean
+] => {
+  const [isVisible, setVisibility] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      setVisibility(entry.isIntersecting);
+    });
+    const current = containerRef.current;
+    if (!current) return;
+    observer.observe(current);
+    return () => {
+      observer.unobserve(current);
+    };
+  }, [containerRef]);
+
+  return [containerRef, isVisible];
+};
+export { generateData, gsapFade, headerClasses, useObserver };

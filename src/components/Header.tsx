@@ -1,16 +1,15 @@
-import './styling/main-header.css';
-import './styling/action-button.css';
+// import './styling/main-header.css';
+
+import Hero from './Hero';
+import Navigation from './Navigation';
+
+// import './styling/action-button.css';
 const MainHeader = () => {
   return (
-    <div className='header'>
-      <h1>Dentistry</h1>
-      <h2>Staffordshire</h2>
-      <a href='#about'>
-        <button type='button' className='fill'>
-          Contact us
-        </button>
-      </a>
-    </div>
+    <header id='header' className='text-gray-600 min-h-screen flex flex-col'>
+      <Navigation />
+      <Hero />
+    </header>
   );
 };
 export default MainHeader;
