@@ -6,21 +6,21 @@ export default function Hero() {
   const svg = React.useRef<SVGSVGElement>(null);
 
   React.useEffect(() => {
-    const tl = gsap.timeline({});
+    const toothTL = gsap.timeline({});
     const tl2 = gsap.timeline({ duration: 1.4 });
     const q = gsap.utils.selector(svg.current);
-    tl.from('.tooth', {
+    toothTL.from('.tooth', {
       opacity: 0,
       left: '-100%',
       top: '50%',
       duration: 2.5,
       rotate: -15,
-      scale: 1,
+      scale: 10,
     });
-    tl.to('.tooth', {
+    toothTL.to('.tooth', {
       rotate: -10,
     });
-    tl.to('.tooth', {
+    toothTL.to('.tooth', {
       rotate: 15,
     });
     tl2.from('.header', {
@@ -36,11 +36,12 @@ export default function Hero() {
     });
 
     gsap.from(q('.sparkle'), {
-      opacity: 0.2,
+      opacity: 0,
       stagger: 0.5,
       duration: 0.5,
       yoyo: true,
-      scale: 1.1,
+      width: 0,
+      height: 0,
       repeat: -1,
     });
   }, []);
