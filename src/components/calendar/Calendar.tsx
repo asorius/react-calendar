@@ -25,8 +25,8 @@ function Calendar({ data }: PROPTYPES) {
 
   return (
     <article
-      className={`calendar-container rounded-lg bg-gray-light/20 relative pb-6 px-2 mt-10 ${
-        creationIsOpen ? 'mb-20' : 'border border-gray-200'
+      className={`calendar-container rounded-lg bg-white relative pb-6 px-2 mt-10 ${
+        creationIsOpen ? 'mb-20' : 'border border-gray-50'
       } shadow-md`}>
       <CalendarContextProvider>
         <div

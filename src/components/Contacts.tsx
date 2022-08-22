@@ -17,7 +17,7 @@ export default function About() {
     }));
   };
   return (
-    <section id='Contacts' className='body-font relative mt-20'>
+    <section id='Contacts' className='body-font relative mt-20 overflow-hidden'>
       <div className='container mx-auto'>
         <h1 className={headerClasses}>Contact us</h1>
         <div className=' px-5 py-24  flex sm:flex-nowrap flex-wrap'>
@@ -48,7 +48,11 @@ export default function About() {
                 <h2 className='title-font font-semibold text-gray-900 tracking-widest text-xs'>
                   EMAIL
                 </h2>
-                <a className='text-main leading-relaxed'>example@email.com</a>
+                <a
+                  href='mailto:google@google.com'
+                  className='text-main leading-relaxed'>
+                  example@email.com
+                </a>
                 <h2 className='title-font font-semibold text-gray-900 tracking-widest text-xs mt-4'>
                   PHONE
                 </h2>

@@ -55,7 +55,7 @@ export default function Form({
   };
   return (
     <div
-      className={`creation-form-container duration-700 absolute top-0 left-0 bg-white rounded-md border border-gray-darken ${
+      className={`creation-form-container duration-700 absolute top-0 left-0 bg-white rounded-md border border-gray-50 ${
         open ? 'translate-x-0 opacity-100 z-20' : 'translate-x-full opacity-0'
       } `}>
       <h2 className='text-center py-4 italic font-semibold'>

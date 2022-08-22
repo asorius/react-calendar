@@ -46,7 +46,7 @@ interface FormButtonPropTypes {
 }
 const FormButton = (props: FormButtonPropTypes) => (
   <button
-    className={`rounded-md px-3.5 py-2 my-1 mx-auto overflow-hidden relative group cursor-pointer border-2 font-medium max-w-[10rem] ${
+    className={`rounded-md px-3.5 py-2 my-1 mx-auto overflow-hidden relative group cursor-pointer border font-medium max-w-[10rem] ${
       props.cancel ? 'border-gray-800 text-gray-800' : 'border-main text-main'
     } disabled:border-gray-darken/50  disabled:text-gray-darken/50`}
     {...props}>

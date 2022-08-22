@@ -16,6 +16,7 @@ module.exports = {
       },
       backgroundImage: {
         'about-background': 'url("./components/images/dentist.jpg")',
+        'bookings-background': 'url("./components/images/calendar.jpg")',
       },
     },
   },
