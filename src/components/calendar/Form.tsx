@@ -55,15 +55,15 @@ export default function Form({
   };
   return (
     <div
-      className={`creation-form-container duration-700 absolute top-0 left-0 bg-white rounded-md border border-gray-50 ${
-        open ? 'translate-x-0 opacity-100 z-20' : 'translate-x-full opacity-0'
+      className={`creation-form-container duration-700 absolute lg:block top-0 left-0  bg-white rounded-md border border-gray-50  lg:w-full  ${
+        open ? 'translate-x-0 opacity-100 z-20' : 'translate-x-full opacity-100'
       } `}>
       <h2 className='text-center py-4 italic font-semibold'>
         {' '}
         Availability for {date.day}/{date.month}/{date.year}
       </h2>
       <form
-        className='form-element grid grid-flow-row'
+        className='form-element grid grid-flow-row '
         onSubmit={submitHandler}>
         {times && (
           <div className='time-selection text-right py-4'>

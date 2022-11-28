@@ -15,7 +15,7 @@ module.exports = {
         'gray-darken': colors.gray[500],
       },
       backgroundImage: {
-        'about-background': 'url("./components/images/dentist.jpg")',
+        'about-background': 'url("./components/images/about.jpg")',
         'bookings-background': 'url("./components/images/calendar.jpg")',
       },
     },

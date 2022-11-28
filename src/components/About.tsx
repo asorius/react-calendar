@@ -1,7 +1,7 @@
 import React from 'react';
 import Feature from './Feature';
 import { headerClasses } from './utils';
-
+// bg-gradient-to-br from-main to-accent
 export default function About() {
   const title = 'Our services';
   const description =
@@ -13,8 +13,8 @@ export default function About() {
   return (
     <section
       id='About'
-      className=' body-font bg-gradient-to-br from-main to-accent'>
-      <div className='container px-5 py-24 mx-auto'>
+      className=' body-font bg-about-background bg-no-repeat bg-cover bg-center bg-fixed bg-black/50'>
+      <div className='container px-5 py-24 lg:px-14 mx-auto bg-gradient-to-r from-neutral-900/90 to-neutral-900/60'>
         <div className='flex flex-col text-center w-full mb-20'>
           <h1 className={headerClasses + '  text-text-lighter'}>{title}</h1>
           <p className='lg:w-2/3 mx-auto mt-6 leading-relaxed text-base text-text-light'>

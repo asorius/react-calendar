@@ -23,7 +23,7 @@ export default function InputElement({
   const inputRef = React.useRef<HTMLInputElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   return (
-    <div className={`input-element relative flex flex-col text-md p-2  mt-2`}>
+    <div className={`input-element relative flex flex-col text-md p-2 mt-2 `}>
       <label
         className={`input-label  absolute ${
           textareaRef.current ? 'top-[13%] ' : 'bottom-1/4 '

@@ -72,7 +72,7 @@ export default function Hero() {
         x='0px'
         y='0px'
         ref={svg}
-        className='tooth absolute scale-[0.5] -top-[8%] left-2 w-[60vw] h-[60vh]'
+        className='tooth absolute scale-[0.5] -top-[8%] lg:-top-[5%] left-2 w-[60vw] h-[60vh]'
         viewBox='0 0 56.598 56.598'>
         <path
           d='M53.065,10.657c-0.819-3.095-3.213-6.049-6.743-8.317c-4.35-2.797-10.498-3.108-16.049-0.813l-0.177,0.076

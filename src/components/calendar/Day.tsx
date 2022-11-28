@@ -82,7 +82,7 @@ export default function Day({
 
   return (
     <button
-      className={`disabled:cursor-not-allowed relative border w-8 h-8 rounded-br-md day ${
+      className={`disabled:cursor-not-allowed relative border w-8 h-8 rounded-br-md disabled:hover:bg-inherit hover:font-bold hover:border-2  hover:bg-accent/50 day ${
         isCurrentDay
           ? 'border-dashed border-2 border-main text-main bg-main/10'
           : 'border-solid'

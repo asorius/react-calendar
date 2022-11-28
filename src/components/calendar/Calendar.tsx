@@ -25,14 +25,14 @@ function Calendar({ data }: PROPTYPES) {
 
   return (
     <article
-      className={`calendar-container rounded-lg bg-white relative pb-6 px-2 mt-10 ${
-        creationIsOpen ? 'mb-20' : 'border border-gray-50'
-      } shadow-md`}>
+      className={`calendar-container rounded-lg bg-white relative px-2 lg:px-10 mt-10 overflow-hidden  ${
+        creationIsOpen ? 'pb-20' : 'border border-gray-50 pb-6'
+      } shadow-md lg:max-w-sm lg:mx-auto`}>
       <CalendarContextProvider>
         <div
-          className={`form-weekday-container rounded-lg z-10 duration-300   ${
+          className={`form-weekday-container rounded-lg z-10 duration-300 h-full lg:grid lg:grid-flow-row ${
             creationIsOpen
-              ? '-translate-x-full opacity-0'
+              ? '-translate-x-full lg:translate-x-full opacity-0'
               : 'translate-x-0 opacity-100 '
           }`}>
           <CalendarHeader></CalendarHeader>

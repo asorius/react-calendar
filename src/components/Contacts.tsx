@@ -18,8 +18,8 @@ export default function About() {
   };
   return (
     <section id='Contacts' className='body-font relative mt-20 overflow-hidden'>
+      <h1 className={headerClasses}>Contact us</h1>
       <div className='container mx-auto'>
-        <h1 className={headerClasses}>Contact us</h1>
         <div className=' px-5 py-24  flex sm:flex-nowrap flex-wrap'>
           <div className='lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative'>
             <iframe
@@ -64,7 +64,7 @@ export default function About() {
             <h2 className='text-gray-900 text-lg mb-1 font-medium title-font underline decoration-accent underline-offset-4'>
               Feedback
             </h2>
-            <p className='leading-relaxed mb-5 text-gray-600'>
+            <p className='leading-relaxed mb-5 text-gray-600 lg:py-4 lg:px-6'>
               {feedbackDetails}
             </p>
             <div className='relative '>
@@ -84,7 +84,7 @@ export default function About() {
                 value={formValues.feedbackMessage}></InputElement>
             </div>
             <FormButton>Submit</FormButton>
-            <p className='text-xs text-gray-500 mt-3'>
+            <p className='text-xs text-gray-500 mt-3 lg:px-6'>
               By submiting this form you declare that you agree with terms and
               conditions. All information is stored in according to EU and UK
               internal law.
